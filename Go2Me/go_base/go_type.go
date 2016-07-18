@@ -6,7 +6,7 @@ var isActivity bool = true
 // 忽略类型的声明
 var enabled, disabled = true, false
 
-func test() {
+func go_base_type_test() {
 	var isActivity bool  // 一般声明
 	valid := false      // 简短声明
 	isActivity = true    // 赋值操作

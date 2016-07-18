@@ -7,7 +7,7 @@ package go_base
 
 // Warning! You can not cast different number format such as below
 
-func err_number_format() {
+func go_base_err_number_format() {
 	var oneCode int8 = 10
 	var twoCode int16 = 100
 	// this will be error
