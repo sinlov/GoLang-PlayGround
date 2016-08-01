@@ -141,11 +141,11 @@ func Test_switch(t *testing.T) {
 }
 
 func sumAndProduct(A, B int) (int, int) {
-	return A+B, A*B
+	return A + B, A * B
 }
 
 func Test_mutli_function(t *testing.T) {
-	r1, r2 :=sumAndProduct(1, 2)
+	r1, r2 := sumAndProduct(1, 2)
 	fmt.Println(r1, r2)
 	//不导出的函数 返回的时候可以不用带上变量名，因为直接在函数里面初始化
 	//但如果你的函数是导出的(首字母大写)，官方建议：最好命名返回值
@@ -154,3 +154,26 @@ func Test_mutli_function(t *testing.T) {
 }
 
 
+//传指针使得多个函数能操作同一个对象
+
+//传指针比较轻量级 (8bytes),只是传内存地址，我们可以用指针传递体积大的结构体。
+//如果用参数值传递的话, 在每次copy上面就会花费相对较多的系统开销（内存和时间）。
+//go语言中channel，slice，map这三种类型的实现机制类似指针，所以可以直接传递，而不用取地址后传递指针
+
+//简单的一个函数，实现了参数+1的操作
+func add1(a *int) int {
+	// 请注意，
+	*a = *a + 1 // 修改了a的值
+	return *a // 返回新值
+}
+
+func Test_point_add1(t *testing.T) {
+	x := 3
+
+	fmt.Println("x = ", x)  // 应该输出 "x = 3"
+
+	x1 := add1(&x)  // 调用 add1(&x) 传x的地址
+
+	fmt.Println("x+1 = ", x1) // 应该输出 "x+1 = 4"
+	fmt.Println("x = ", x)    // 应该输出 "x = 4"
+}
