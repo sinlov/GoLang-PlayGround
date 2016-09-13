@@ -49,17 +49,17 @@ func Test_mutli_json_double() {
 		fmt.Println("json err:", err)
 	}
 	fmt.Println("Del", string(thr))
-	res, err :=js.MarshalJSON()
+	res, err := js.MarshalJSON()
 	fmt.Println("MarshalJSON", string(res))
 
-
-	js4g,err := json4g.LoadByString(json_data)
+	js4g, err := json4g.LoadByString(json_data)
 	fmt.Println("LoadByString", js4g.ToString())
 	js4g.GetNodeByPath("status").SetValue(403)
 	fmt.Println(js4g.ToString())
 	err = js4g.DelNode("status")
-	if  err != nil{
+	if err != nil {
 		fmt.Println(err.Error())
 	}
 	fmt.Println("DelNode", js4g.ToString())
+
 }
