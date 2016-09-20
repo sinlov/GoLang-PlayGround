@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestFastTimeTest(t *testing.T) {
+func TestStringsJoinSliceStringTime(t *testing.T) {
 	type args struct {
 		slice []string
 	}
@@ -77,7 +77,7 @@ func TestFastTimeTest(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		if got := FastTimeTest(tt.args.slice); !reflect.DeepEqual(got, tt.want) {
+		if got := StringsJoinSliceStringTime(tt.args.slice); !reflect.DeepEqual(got, tt.want) {
 			t.Logf("%q. FastTimeTest() = %v ns, test %v", tt.name, got, tt.want)
 		}
 	}
