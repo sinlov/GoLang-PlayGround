@@ -78,7 +78,7 @@ func TestStringsJoinSliceStringTime(t *testing.T) {
 	}
 	for _, tt := range tests {
 		if got := StringsJoinSliceStringTime(tt.args.slice); !reflect.DeepEqual(got, tt.want) {
-			t.Logf("%q. FastTimeTest() = %v ns, test %v", tt.name, got, tt.want)
+			t.Logf("%q. StringsJoinSliceStringTime() = %v ns, test %v", tt.name, got, tt.want)
 		}
 	}
 }
