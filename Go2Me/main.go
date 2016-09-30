@@ -2,7 +2,6 @@ package main
 
 import (
 	"GoLang-PlayGround/Go2Me/go_parse"
-	"fmt"
 )
 
 func main() {
@@ -15,7 +14,4 @@ func main() {
 	//fmt.Println(res)
 	//go_parse.Unicode2utf8()
 	//go_parse.Unicode2utf8()
-	str4En := "123456qwert"
-	enRes := go_parse.MByteEncode([]byte(str4En))
-	fmt.Println(enRes)
 }
