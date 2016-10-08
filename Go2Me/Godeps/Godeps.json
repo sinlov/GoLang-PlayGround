@@ -1,0 +1,21 @@
+{
+	"ImportPath": "GoLang-PlayGround/Go2Me",
+	"GoVersion": "go1.7",
+	"GodepVersion": "v74",
+	"Deps": [
+		{
+			"ImportPath": "github.com/bitly/go-simplejson",
+			"Comment": "v0.5.0",
+			"Rev": "aabad6e819789e569bd6aabf444c935aa9ba1e44"
+		},
+		{
+		"ImportPath": "github.com/donnie4w/json4g",
+			"Rev": "55f68986f34c6acc1c3c908fbefdbcba29a91e32"
+		},
+		{
+			"ImportPath": "github.com/sinlov/fastEncryptDecode",
+			"Comment": "0.0.1",
+			"Rev": "a3be5cfa93f2ae6d41ef506c067bb9ca127d7812"
+		}
+	]
+}
