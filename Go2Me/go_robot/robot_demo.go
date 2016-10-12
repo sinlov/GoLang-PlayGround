@@ -23,11 +23,13 @@ func OSX_Open_Chrome_To_GitHub() {
 	//robotgo.DragMouse(270, 80)
 	//time.Sleep(200 * time.Millisecond)
 	//robotgo.MouseClick()
-	robotgo.KeyToggle("command", "down")
+	robotgo.KeyToggle("super", "space")
 	time.Sleep(200 * time.Millisecond)
-	robotgo.KeyTap("space")
+	//robotgo.KeyTap("space")
+	//time.Sleep(200 * time.Millisecond)
+	//robotgo.KeyToggle("command", "up")
+	//time.Sleep(200 * time.Millisecond)
+	eachSecKeyBroadInput("chrome")
 	time.Sleep(200 * time.Millisecond)
-	robotgo.KeyToggle("command", "up")
-	time.Sleep(200 * time.Millisecond)
-	//eachSecKeyBroadInput("https://
+	robotgo.KeyTap("enter")
 }
