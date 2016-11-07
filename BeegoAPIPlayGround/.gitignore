@@ -1,0 +1,5 @@
+# Created by .ignore support plugin (hsz.mobi)
+routers/commentsRouter_*
+
+# swagger
+/swagger
