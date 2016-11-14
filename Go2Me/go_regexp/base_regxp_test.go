@@ -70,7 +70,12 @@ func Test_replaceString(t *testing.T) {
 		name string
 		args args
 	}{
-		// TODO: Add test cases.
+		{
+			name:"chat",
+			args:args{
+				text: `Hello 世界！123 Go.`,
+			},
+		},
 	}
 	for _, tt := range tests {
 		replaceString(tt.args.text)
