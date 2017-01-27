@@ -2,6 +2,26 @@ package go_regexp
 
 import "testing"
 
+func Test_web(t *testing.T) {
+	type args struct {
+		text string
+	}
+	tests := []struct {
+		name string
+		args args
+	}{
+		{
+			name:"chat",
+			args:args{
+				text: `123@kf.com`,
+			},
+		},
+	}
+	for _, tt := range tests {
+		web(tt.args.text)
+	}
+}
+
 func Test_chat(t *testing.T) {
 	type args struct {
 		text string

@@ -78,3 +78,8 @@ func replaceString(text string) {
 	reg = regexp.MustCompile(`[\f\t\n\r\v\123\x7F\x{10FFFF}\\\^\$\.\*\+\?\{\}\(\)\[\]\|]`)
 	fmt.Printf("# Input %v -> # Output -> %q\t# 特殊字符的查找 `[\\f\\\t\\n\\r\\v\\123\\x7F\\x{10FFFF}\\\\\\^\\$\\.\\*\\+\\?\\{\\}\\(\\)\\[\\]\\|]`\n", text, reg.ReplaceAllString("\f\t\n\r\v\123\x7F\U0010FFFF\\^$.*+?{}()[]|", "-"))
 }
+
+func web(test string) {
+	has, err := regexp.Match(`\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*`, []byte(test))
+	fmt.Printf("has %v, err %v", has, err)
+}
