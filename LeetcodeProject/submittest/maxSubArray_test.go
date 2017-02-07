@@ -16,7 +16,21 @@ func Test_maxSubArray(t *testing.T) {
 			args: args{
 				nums: []int{-2, 1, -3, 4, -1, 2, 1, -5, 4},
 			},
-			want: 8,
+			want: 6,
+		},
+		{
+			name: "one",
+			args: args{
+				nums: []int{1},
+			},
+			want: 1,
+		},
+		{
+			name: "two",
+			args: args{
+				nums: []int{-2, 1},
+			},
+			want: 1,
 		},
 	}
 	for _, tt := range tests {

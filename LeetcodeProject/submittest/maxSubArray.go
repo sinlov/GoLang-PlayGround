@@ -4,8 +4,20 @@ func maxSubArray(nums []int) int {
 	var f int
 	var s int
 	numsLen := len(nums)
-	if numsLen < 2{
-		return nums[0] + nums[1]
+	if numsLen == 0 {
+		return 0
+	}
+
+	if numsLen == 1 {
+		return  nums[0]
+	}
+	if numsLen == 2{
+		if nums[0] > nums[1] {
+			return nums[0]
+		} else {
+			return nums[1]
+		}
+
 	}
 	f = nums[0]
 	s = nums[1]
@@ -15,9 +27,12 @@ func maxSubArray(nums []int) int {
 	}
 	for i := 2 ; i < len(nums) -3 ; i++ {
 		n := nums[i]
+		if n > s {
+			s = n
+		}
 		if n > f {
-			f = n
 			s = f
+			f = n
 		}
 	}
 	return f + s
