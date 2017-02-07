@@ -3,3 +3,5 @@ routers/commentsRouter_*
 
 # swagger
 /swagger
+
+*.tmp
