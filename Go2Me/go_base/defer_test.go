@@ -16,9 +16,9 @@ func readWrite() bool {
 	if err != nil {
 		return false
 	}
-	if err.Error() {
-		return false
-	}
+	//if err.Error() {
+	//	return false
+	//}
 	return true
 }
 

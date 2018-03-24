@@ -94,7 +94,7 @@ func Test_for(t *testing.T) {
 	}
 	//支持 “多值返回”, 而对于“声明而未被调用”的变量, 编译器会报错, 在这种情况下, 可以使用_来丢弃不需要的返回值
 	eMap := []int{1, 2, 3, 4, 5, 6}
-	for _, eV, _ := range eMap {
+	for _, eV := range eMap {
 		fmt.Println("error map val is ", eV)
 	}
 }
