@@ -1,4 +1,4 @@
-package go_time
+package go_time_count
 
 import (
 	"fmt"
