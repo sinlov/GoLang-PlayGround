@@ -20,3 +20,10 @@ func Equal(n int) (int, error) {
 	}
 	return n, nil
 }
+
+func DiyEqual(n int) (int, error) {
+	if n > 55 {
+		return -1, equalError{Num: n} // 会调用equalError的Error方法
+	}
+	return n, nil
+}
