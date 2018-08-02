@@ -23,6 +23,7 @@ func chat(text string) {
 
 	reg = regexp.MustCompile(`[[:^ascii:]]+`)
 	fmt.Printf("# Input %v -> # Output -> %q\t# 查找连续的非 ASCII 字符 `[[:^ascii:]]+`\n", text, reg.FindAllString(text, -1))
+	fmt.Printf("# Input %v -> # Output -> %q\t# 删除查找连续的非 ASCII 字符 `[[:^ascii:]]+`\n", text, reg.ReplaceAllString(text, ""))
 }
 
 func innerStringFind(text string) {
@@ -69,10 +70,11 @@ func punctuationMark(text string) {
 }
 
 func replaceString(text string) {
-	reg := regexp.MustCompile(`(?PHell|G)o`)
-	fmt.Printf("# Input %v -> # Output -> %q\t# 查找 Hello 或 Go，替换为 Hellooo、Gooo `(?PHell|G)o`\n", text, reg.ReplaceAllString(text, "${n}ooo"))
+	// not support Perl!
+	//reg := regexp.MustCompile(`(?PHell|G)o`)
+	//fmt.Printf("# Input %v -> # Output -> %q\t# 查找 Hello 或 Go，替换为 Hellooo、Gooo `(?PHell|G)o`\n", text, reg.ReplaceAllString(text, "${n}ooo"))
 
-	reg = regexp.MustCompile(`(Hello)(.*)(Go)`)
+	reg := regexp.MustCompile(`(Hello)(.*)(Go)`)
 	fmt.Printf("# Input %v -> # Output -> %q\t# 交换 Hello 和 Go `(Hello)(.*)(Go)`\n", text, reg.ReplaceAllString(text, "$3$2$1"))
 
 	reg = regexp.MustCompile(`[\f\t\n\r\v\123\x7F\x{10FFFF}\\\^\$\.\*\+\?\{\}\(\)\[\]\|]`)
