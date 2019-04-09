@@ -1,8 +1,8 @@
 package go_regexp
 
 import (
-	"regexp"
 	"fmt"
+	"regexp"
 )
 
 func chat(text string) {
@@ -81,7 +81,34 @@ func replaceString(text string) {
 	fmt.Printf("# Input %v -> # Output -> %q\t# 特殊字符的查找 `[\\f\\\t\\n\\r\\v\\123\\x7F\\x{10FFFF}\\\\\\^\\$\\.\\*\\+\\?\\{\\}\\(\\)\\[\\]\\|]`\n", text, reg.ReplaceAllString("\f\t\n\r\v\123\x7F\U0010FFFF\\^$.*+?{}()[]|", "-"))
 }
 
-func web(test string) {
+func email(test string) {
 	has, err := regexp.Match(`\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*`, []byte(test))
-	fmt.Printf("has %v, err %v", has, err)
+	fmt.Printf("email has %v, err %v => target %v\n", has, err, test)
+}
+
+func password(test string) {
+	// https://stackoverflow.com/questions/25159236/panic-when-compiling-a-regular-expression so ^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)[\w]{6,20}$ not use
+	has, err := matchPassword(test)
+	fmt.Printf("password has %v, err %v => target %v\n", has, err, test)
+}
+
+// https://stackoverflow.com/questions/25159236/panic-when-compiling-a-regular-expression so ^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)[\w]{6,20}$ not use
+func matchPassword(test string) (bool, error) {
+	has, err := regexp.MatchString(`^[\w]{6,20}$`, test)
+	if err != nil || !has {
+		return false, err
+	}
+	matchedNumber, err := regexp.MatchString(`[0-9]+`, test)
+	if err != nil || !matchedNumber {
+		return false, err
+	}
+	matchedLower, err := regexp.MatchString(`[a-z]+`, test)
+	if err != nil || !matchedLower {
+		return false, err
+	}
+	matchedUpper, err := regexp.MatchString(`[A-z]+`, test)
+	if err != nil || !matchedUpper {
+		return false, err
+	}
+	return true, nil
 }
