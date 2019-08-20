@@ -1,14 +1,15 @@
 package go_robot
 
 import (
+	"fmt"
+
 	"github.com/go-vgo/robotgo"
-	"time"
 )
 
 func eachSecKeyBroadInput(word string) {
-	time.Sleep(200 * time.Millisecond)
+	robotgo.Sleep(1)
 	robotgo.TypeString(word)
-	time.Sleep(200 * time.Millisecond)
+	robotgo.Sleep(1)
 }
 
 func OSX_Open_Chrome_To_GitHub() {
@@ -23,13 +24,72 @@ func OSX_Open_Chrome_To_GitHub() {
 	//robotgo.DragMouse(270, 80)
 	//time.Sleep(200 * time.Millisecond)
 	//robotgo.MouseClick()
-	robotgo.KeyToggle("super", "space")
-	time.Sleep(200 * time.Millisecond)
+	// robotgo.KeyTap("command", "space")
+	// robotgo.Sleep(1)
+	// time.Sleep(200 * time.Millisecond)
 	//robotgo.KeyTap("space")
 	//time.Sleep(200 * time.Millisecond)
 	//robotgo.KeyToggle("command", "up")
 	//time.Sleep(200 * time.Millisecond)
-	eachSecKeyBroadInput("chrome")
-	time.Sleep(200 * time.Millisecond)
-	robotgo.KeyTap("enter")
+	// eachSecKeyBroadInput("pwd")
+	// robotgo.KeyTap("enter")
+	// eachSecKeyBroadInput("brew info golang")
+	// robotgo.KeyTap("enter")
+	// robotgo.Sleep(5)
+	// robotgo.KeyTap("a", "ctrl")
+	// robotgo.KeyTap("k", "ctrl")
+
+	// eachSecKeyBroadInput("chrome")
+	// robotgo.Sleep(2)
+	// time.Sleep(200 * time.Millisecond)
+	// robotgo.KeyTap("enter")
+	// x, y := robotgo.GetMousePos()
+	// fmt.Println("pos: ", x, y)
+	// color := robotgo.GetPixelColor(100, 100)
+	// fmt.Println("color---- ", color)
+
+	// bitmap := robotgo.CaptureScreen(20, 20, 180, 700)
+	// // use `defer robotgo.FreeBitmap(bit)` to free the bitmap
+	// defer robotgo.FreeBitmap(bitmap)
+
+	// fmt.Println("...", bitmap)
+
+	// fx, fy := robotgo.FindBitmap(bitmap)
+	// fmt.Println("FindBitmap------ ", fx, fy)
+
+	// robotgo.SaveBitmap(bitmap, "test.png")
+
+	// keve := robotgo.AddEvent("k")
+	// if keve == 0 {
+	// 	fmt.Println("you press... ", "k")
+	// }
+	count := 10
+	for i := 0; i < count; i++ {
+		mleft := robotgo.AddEvent("mleft")
+		if mleft == 0 {
+			x, y := robotgo.GetMousePos()
+			fmt.Printf("you press %v => x,y [%d, %d]\n", "mouse left button", x, y)
+		}
+	}
+
+	// fpid, err := robotgo.FindIds("Electron")
+	// if err == nil {
+	// 	fmt.Println("pids... ", fpid)
+	// 	if len(fpid) > 0 {
+	// 		firstID := fpid[0]
+	// 		pName, err := robotgo.FindName(firstID)
+	// 		if err == nil {
+	// 			fmt.Printf("fpid %d => pName %v\n", fpid, pName)
+	// 			if pName == "Electron" {
+	// 				robotgo.ActivePID(firstID)
+	// 				robotgo.KeyTap("n", "command")
+	// 				robotgo.Sleep(1)
+	// 				eachSecKeyBroadInput("github.com/sinlov")
+	// 				robotgo.KeyTap("enter")
+	// 				robotgo.Sleep(5)
+	// 			}
+	// 		}
+	// 	}
+	// }
+	// robotgo.ActiveName("chrome")
 }

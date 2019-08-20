@@ -16,5 +16,5 @@ func go_sum() {
 	go sum(a[:len(a) / 2], c)
 	go sum(a[len(a) / 2:], c)
 	x, y := <-c, <-c // receive from c
-	fmt.Printf("value x: %s,| value y: %s\n", x, y)
+	fmt.Printf("value x: %v,| value y: %v\n", x, y)
 }
