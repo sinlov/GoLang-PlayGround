@@ -3,7 +3,9 @@
 
 ## macOS
 
+- 10.14.6
 - 2.9 GHz Intel Core i5
+- IsLittleEndian <- true
 
 ```log
 goos: darwin
