@@ -27,6 +27,6 @@ func TestMutilAdd(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		MutilAdd(tt.args.start, tt.args.count)
+		MultiAdd(tt.args.start, tt.args.count)
 	}
 }

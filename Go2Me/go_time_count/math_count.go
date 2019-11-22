@@ -10,7 +10,7 @@ func add(x, y int) {
 	fmt.Printf("add number %v \n", z)
 }
 
-func MutilAdd(start, count int) {
+func MultiAdd(start, count int) {
 	fmt.Printf("start at number %v, end count %v\n",start, count)
 	start_time := time.Now()
 	ch := make(chan int, count)
@@ -24,5 +24,5 @@ func MutilAdd(start, count int) {
 	}
 	<-ch
 	end_time := time.Since(start_time).Nanoseconds()
-	fmt.Printf("MutilAdd time: %v \n", end_time)
+	fmt.Printf("MultiAdd time: %v \n", end_time)
 }

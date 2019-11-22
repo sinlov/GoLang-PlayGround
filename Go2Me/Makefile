@@ -28,7 +28,7 @@ SERVER_REPO_SSH_ALIASE = web-gin-temp
 SERVER_REPO_FOLDER = /home/ubuntu/$(ROOT_NAME)
 
 # can use as https://goproxy.io/ https://gocenter.io https://mirrors.aliyun.com/goproxy/
-INFO_GO_PROXY ?= https://mirrors.aliyun.com/goproxy/
+ENV_GO_PROXY ?= https://goproxy.io/
 
 checkEnvGOPATH:
 ifndef GOPATH
