@@ -10,11 +10,11 @@ matrix:
 
 install:
   - export GO111MODULE=on
-  - go get -t -v $(go list ./... | grep -v -E "vendor|go_fatal_error|robotn|shirou")
+  - go get -t -v $(go list ./... | grep -v -E "vendor|go_fatal_error|robotn|shirou|go_robot")
 
 script:
   - GO111MODULE=on
-  - go test -cover -coverprofile=coverage.txt -covermode=atomic -v $(go list ./... | grep -v -E "vendor|go_fatal_error|robotn|shirou")
+  - go test -cover -coverprofile=coverage.txt -covermode=atomic -v $(go list ./... | grep -v -E "vendor|go_fatal_error|robotn|shirou|go_robot")
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

@@ -15,7 +15,7 @@ DIST_OS_DOCKER ?= linux
 DIST_ARCH_DOCKER ?= amd64
 
 # ignore used not matching mode
-ROOT_TEST_INVERT_MATCH ?= "vendor|go_fatal_error|robotn|shirou"
+ROOT_TEST_INVERT_MATCH ?= "vendor|go_fatal_error|robotn|shirou|go_robot"
 # set ignore of test case like grep -v -E "vendor|go_fatal_error" to ignore vendor and go_fatal_error package
 ROOT_TEST_LIST := $$(go list ./... | grep -v -E $(ROOT_TEST_INVERT_MATCH))
 # test max time
