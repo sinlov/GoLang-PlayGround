@@ -1,8 +1,27 @@
-### Go template
+### build temple
+build/
+dist/
+
+### go mod
 
 go.sum
 vendor/
 
+### go test
+# out of testcase
+*.test
+# test coverage out
+coverage.out
+coverage.txt
+# testData folder of golang
+testdata/
+# Expected results when tested
+.golden
+
+### FlatBuffer template
+
+
+### Go template
 # Compiled Object files, Static and Dynamic libs (Shared Objects)
 *.o
 *.a
@@ -136,3 +155,5 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+!cfg/config.conf

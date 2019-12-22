@@ -65,8 +65,8 @@ func OSX_Open_Chrome_To_GitHub() {
 	// }
 	count := 10
 	for i := 0; i < count; i++ {
-		mleft := robotgo.AddEvent("mleft")
-		if mleft == 0 {
+		mLeft := robotgo.AddEvent("mLeft")
+		if mLeft {
 			x, y := robotgo.GetMousePos()
 			fmt.Printf("you press %v => x,y [%d, %d]\n", "mouse left button", x, y)
 		}

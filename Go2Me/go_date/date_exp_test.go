@@ -77,6 +77,7 @@ func TestHour(t *testing.T) {
 			hour := hour()
 			convey.Convey("verify TestHour", func() {
 				// verify
+				t.Logf("hour %v", hour)
 				convey.So("", convey.ShouldEqual, "")
 			})
 		})

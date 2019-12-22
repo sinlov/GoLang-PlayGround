@@ -7,15 +7,15 @@ import (
 )
 
 const (
-	i = 100
-	pi = 3.1415
-	prefix = "Go_"
+	iConst = 100
+	piConst = 3.1415
+	prefixConst = "Go_"
 )
 
 var (
-	i int
-	pi float32
-	prefix string
+	iVar int
+	piVar float32
+	prefixVar string
 )
 
 func go_base_tips() {
@@ -34,7 +34,7 @@ const (
 const v = iota // 每遇到一个const关键字，iota就会重置，此时v == 0
 
 const (
-	e, f, g = iota, iota, iota //e=0,f=0,g=0 iota在同一行值相同
+	eConst, fConst, gConst = iota, iota, iota //e=0,f=0,g=0 iota在同一行值相同
 )
 
 const (

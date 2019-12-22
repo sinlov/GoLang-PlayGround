@@ -3,7 +3,7 @@ package go_base
 import "fmt"
 
 // base array
-var arr [10]int  // 声明了一个int类型的数组
+var arr [10]int // 声明了一个int类型的数组
 
 func test_array() {
 	arr[0] = 0
@@ -12,8 +12,8 @@ func test_array() {
 	//返回未赋值的最后一个元素，默认返回0
 	fmt.Printf("The last element is %d\n", arr[9])
 	// 快速声明
-	a := [3]int{1, 2, 3} // 声明了一个长度为3的int数组
-	b := [10]int{1, 2, 3} // 声明了一个长度为10的int数组，其中前三个元素初始化为1、2、3，其它默认为0
+	a := [3]int{1, 2, 3}   // 声明了一个长度为3的int数组
+	b := [10]int{1, 2, 3}  // 声明了一个长度为10的int数组，其中前三个元素初始化为1、2、3，其它默认为0
 	c := [...]int{4, 5, 6} // 可以省略长度而采用`...`的方式，Go会自动根据元素个数来计算长度
 	fmt.Println(a, b, c)
 	//多维数组
@@ -36,18 +36,18 @@ var mSlice []int
 
 // slice通过array[i:j]来获取，其中i是数组的开始位置，j是结束位置，但不包含array[j]，它的长度是j-i
 var ar = [10]byte{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
-var a, b []byte
+var aArr, bArr []byte
 
 func test_slice() {
 	sSlice := []byte{'a', 'b', 'c', 'd'}
 	fmt.Println(sSlice)
-	a = ar[2:5]
-	b = ar[3:5]
+	aArr = ar[2:5]
+	bArr = ar[3:5]
 	//slice有一些简便的操作
-	ar[:3] == ar[0:3]
-	arlen := len(ar)
-	ar[9:] == ar[9:arlen]
-	ar[:] == ar[0:arlen]
+	//ar[:3] == ar[0:3]
+	//arlen := len(ar)
+	//ar[9:] == ar[9:arlen]
+	//ar[:] == ar[0:arlen]
 
 	// 声明一个数组
 	var array = [10]byte{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
@@ -71,11 +71,14 @@ func test_slice() {
 	//例如上面的aSlice和bSlice，如果修改了aSlice中元素的值，那么bSlice相对应的值也会改变
 
 	//内置函数
-	len(ar) //获取长度
-	cap(ar) //获取最大容量
-	append(ar) //追加一个或者多个元素，然后返回一个和slice一样类型的slice
-	var br []byte
-	copy(br, ar) //从源slice的src中复制元素到目标dst，并且返回复制的元素的个数
+	newArr := []byte{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
+	lenNew := len(newArr) //获取长度
+	fmt.Printf("newArr len is %v\n", lenNew)
+	capNew := cap(newArr) //获取最大容量
+	fmt.Printf("newArr cap is %v\n", capNew)
+	//append(ar)       //追加一个或者多个元素，然后返回一个和slice一样类型的slice
+	var cpNewArr []byte
+	copy(cpNewArr, newArr) //从源slice的src中复制元素到目标dst，并且返回复制的元素的个数
 
 	// 三个参数的slice go 1.2 开始支持
 
@@ -88,8 +91,7 @@ func test_slice() {
 // 但当slice中没有剩余空间（即(cap-len) == 0）时，此时将动态分配新的数组空间。
 // 返回的slice数组指针将指向这个空间，而原数组的内容将保持不变；其它引用此数组的slice则不受影响
 
-
-func test_map()  {
+func test_map() {
 	// 声明一个key是字符串，值为int的字典,这种方式的声明需要在使用之前使用make初始化
 	var numbers map[string]int
 	// 另一种map的声明方式
@@ -112,7 +114,7 @@ func test_map()  {
 	//map的初始化可以通过key:val的方式初始化值
 
 	// 初始化一个字典
-	rating := map[string]float32{"C":5, "Go":4.5, "Python":4.5, "C++":2 }
+	rating := map[string]float32{"C": 5, "Go": 4.5, "Python": 4.5, "C++": 2}
 	// map有两个返回值，第二个返回值，如果不存在key，那么ok为false，如果存在ok为true
 	cSharpRating, ok := rating["C#"]
 	if ok {
@@ -121,11 +123,11 @@ func test_map()  {
 		fmt.Println("We have no rating associated with C# in the map")
 	}
 
-	delete(rating, "C")  // 删除key为C的元素
+	delete(rating, "C") // 删除key为C的元素
 
 	//如果两个map同时指向一个底层，那么一个改变，另一个也相应的改变
 	m := make(map[string]string)
 	m["Hello"] = "Bonjour"
 	m1 := m
-	m1["Hello"] = "Salut"  // 现在m["hello"]的值已经是Salut了
+	m1["Hello"] = "Salut" // 现在m["hello"]的值已经是Salut了
 }

@@ -5,3 +5,7 @@
 # Go2Me
 
 Base GoLang play...
+
+# LeetcodeDemo
+
+for leetcode
