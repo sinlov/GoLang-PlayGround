@@ -14,7 +14,10 @@ DIST_ARCH := amd64
 DIST_OS_DOCKER ?= linux
 DIST_ARCH_DOCKER ?= amd64
 
-ROOT_TEST_LIST := $$(go list ./... | grep -v -E "vendor|go_fatal_error")
+# ignore used not matching mode
+ROOT_TEST_INVERT_MATCH ?= "vendor|go_fatal_error"
+# set ignore of test case like grep -v -E "vendor|go_fatal_error" to ignore vendor and go_fatal_error package
+ROOT_TEST_LIST := $$(go list ./... | grep -v -E $(ROOT_TEST_INVERT_MATCH))
 # test max time
 ROOT_TEST_MAX_TIME := 1m
 
@@ -100,6 +103,7 @@ run: dev
 
 test:
 	@echo "=> run test start"
+	#=> go test -test.v $(ROOT_TEST_LIST)
 	@go test -test.v $(ROOT_TEST_LIST)
 
 testBenchmem:
@@ -121,7 +125,7 @@ helpProjectRoot:
 	@echo ""
 	@echo "~> make init         - check base env of this project"
 	@echo "~> make clean        - remove binary file and log files"
-	@echo "~> make test         - run test case all benchmem"
+	@echo "~> make test         - run test case ignore --invert-match $(ROOT_TEST_INVERT_MATCH)"
 	@echo "~> make testBenchmem - run go test benchmem case all"
 	@echo "~> make dev          - run as develop"
 
