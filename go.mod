@@ -11,6 +11,7 @@ require (
 	github.com/ideazxy/iso8583 v0.0.0-20160317060925-d06dcb8f1fc4
 	github.com/sinlov/fastEncryptDecode v0.0.0-20191203102542-905b1b5ccec9
 	github.com/smartystreets/goconvey v1.6.4
+	github.com/stretchr/testify v1.3.0
 	github.com/xxtea/xxtea-go v0.0.0-20170828040851-35c4b17eecf6
 	gopkg.in/yaml.v2 v2.2.7
 )
