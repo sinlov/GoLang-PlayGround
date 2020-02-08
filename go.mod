@@ -3,7 +3,7 @@ module github.com/sinlov/GoLang-PlayGround
 go 1.13
 
 require (
-	github.com/BurntSushi/toml v0.3.1
+	github.com/BurntSushi/toml v0.3.1 // indirect
 	github.com/alecthomas/log4go v0.0.0-20180109082532-d146e6b86faa
 	github.com/bitly/go-simplejson v0.5.0
 	github.com/donnie4w/json4g v0.0.0-20160510154529-55f68986f34c
