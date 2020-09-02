@@ -44,6 +44,7 @@ func Test_EmojiModifiedStringToUnicode(t *testing.T) {
 	unicode, err := ModifiedEmojiStringToUnicode(string(targetByte))
 	t.Logf("target %v ModifiedEmojiStringToUnicode %v", string(targetByte), unicode)
 	assert.Nil(t, err)
+	assert.Equal(t, `🐒MyApplication中文`, unicode)
 }
 
 func Test_EncodeStringToUTF16(t *testing.T) {
