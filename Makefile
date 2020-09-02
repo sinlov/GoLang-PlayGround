@@ -125,7 +125,7 @@ helpProjectRoot:
 	@echo ""
 	@echo "~> make init         - check base env of this project"
 	@echo "~> make clean        - remove binary file and log files"
-	@echo "~> make test         - run test case ignore --invert-match $(ROOT_TEST_INVERT_MATCH)"
+	@echo "~> make test         - run test case ignore --invert-match"
 	@echo "~> make testBenchmem - run go test benchmem case all"
 	@echo "~> make dev          - run as develop"
 
