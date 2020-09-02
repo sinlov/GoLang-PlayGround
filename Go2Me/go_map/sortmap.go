@@ -16,19 +16,19 @@ func SortMapByKey(sortMap interface{}, sortFunc interface{}) error {
 	eachMapType := eachMapValue.Type()
 	eachFuncType := eachFuncValue.Type()
 	if eachMapValue.Kind() != reflect.Map {
-		return fmt.Errorf(`SortMap failed. parameter "sortMap" first type must is map[...]...{}`)
+		return fmt.Errorf(`SortMap error. parameter "sortMap" first type must is map[...]...{}`)
 	}
 	if eachFuncValue.Kind() != reflect.Func {
-		return fmt.Errorf(`SortMap failed. parameter "sortFunc" second type must is func(key ..., value ...)`)
+		return fmt.Errorf(`SortMap error. parameter "sortFunc" second type must is func(key ..., value ...)`)
 	}
 	if eachFuncType.NumIn() != 2 {
-		return fmt.Errorf(`SortMap failed. "sortFunc" input parameter count must is 2`)
+		return fmt.Errorf(`SortMap error. "sortFunc" input parameter count must is 2`)
 	}
 	if eachFuncType.In(0).Kind() != eachMapType.Key().Kind() {
-		return fmt.Errorf(`SortMap failed. "sortFunc" input parameter 1 type not equal of "sortMap" key, want %v`, eachMapType.Key().Kind())
+		return fmt.Errorf(`SortMap error. "sortFunc" input parameter 1 type not equal of "sortMap" key, want %v`, eachMapType.Key().Kind())
 	}
 	if eachFuncType.In(1).Kind() != eachMapType.Elem().Kind() {
-		return fmt.Errorf(`SortMap failed. "sortFunc" input parameter 2 type not equal of "sortMap" value, want %v`, eachMapType.Elem().Kind())
+		return fmt.Errorf(`SortMap error. "sortFunc" input parameter 2 type not equal of "sortMap" value, want %v`, eachMapType.Elem().Kind())
 	}
 
 	// sort key
