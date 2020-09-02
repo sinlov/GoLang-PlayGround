@@ -1,10 +1,9 @@
 package security
 
 import (
-	"bytes"
-	"encoding/binary"
-	"encoding/hex"
+	"fmt"
 	"net/url"
+	"strconv"
 	"strings"
 )
 
@@ -25,16 +24,31 @@ func URLQueryDecode(input string) (string, error) {
 }
 
 func UnicodeDecode(input string) (out string, err error) {
-	bs, err := hex.DecodeString(strings.Replace(input, `\u`, ``, -1))
-	if err != nil {
-		return "", err
+	var res = []string{""}
+	sUnicode := strings.Split(input, "\\u")
+
+	if len(sUnicode) < 2 {
+		return "", fmt.Errorf("input unicode error, string must has %v", "\\u")
 	}
-	for i, bl, br, r := 0, len(bs), bytes.NewReader(bs), uint16(0); i < bl; i += 2 {
-		err := binary.Read(br, binary.BigEndian, &r)
-		if err != nil {
-			return "", err
+
+	var context = ""
+	for _, v := range sUnicode {
+		var additional = ""
+		if len(v) < 1 {
+			continue
 		}
-		out += string(r)
+		if len(v) > 4 {
+			rs := []rune(v)
+			v = string(rs[:4])
+			additional = string(rs[4:])
+		}
+		temp, err := strconv.ParseInt(v, 16, 32)
+		if err != nil {
+			context += v
+		}
+		context += fmt.Sprintf("%c", temp)
+		context += additional
 	}
-	return out, nil
+	res = append(res, context)
+	return strings.Join(res, ""), nil
 }

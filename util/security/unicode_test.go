@@ -1,6 +1,7 @@
 package security
 
 import (
+	"fmt"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -106,21 +107,31 @@ func TestUnicodeDecode(t *testing.T) {
 		name   string
 		source string
 		want   string
+		err    error
 	}{
 		{
 			name:   "UnicodeDecode: 你好",
 			source: `\u4f60\u597d\u0020\u6211\u5728`,
 			want:   `你好 我在`,
 		},
+
+		{
+			name:   "UnicodeDecode: error",
+			source: `4f60597d002062115728`,
+			want:   `你好 我在`,
+			err:    fmt.Errorf("input unicode error, string must has %v", "\\u"),
+		},
 	}
 	// do
 	for _, test := range tests {
 		result, err := UnicodeDecode(test.source)
-		if err != nil {
-			t.Fatalf("TestUnicodeDecode error: %v", err)
-		}
 		// verify
-		t.Logf("source: %v, result: %v", test.source, result)
-		assert.Equal(t, test.want, result)
+		if err != nil {
+			t.Logf("TestUnicodeDecode error: %v", err)
+			assert.Equal(t, test.err, err)
+		} else {
+			t.Logf("source: %v, result: %v", test.source, result)
+			assert.Equal(t, test.want, result)
+		}
 	}
 }
