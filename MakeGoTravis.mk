@@ -15,6 +15,9 @@ travisInstall:
 travisTest:
 	GO111MODULE=on go test -test.v $(ROOT_TEST_LIST) -timeout $(ROOT_TEST_MAX_TIME)
 
+travisBenchmem:
+	GO111MODULE=on go test -test.v -bench="." $(ROOT_BENCHMARK_LIST)
+
 travisTestFail:
 	GO111MODULE=on go test -test.v $(ROOT_TEST_LIST) -timeout $(ROOT_TEST_MAX_TIME) | grep FAIL --color
 
@@ -33,6 +36,7 @@ helpGoTravis:
 	@echo "~> make travisFile        - show .travis.yml file can right"
 	@echo "~> make travisInstall     - run project to test travis"
 	@echo "~> make travisTest        - run project test"
+	@echo "~> make travisBenchmem    - run project test bench"
 	@echo "~> make travisTestFail    - run project test fast find FAIL"
 	@echo "~> make travisConvey      - run project convery"
 	@echo "~> make travisConveyLocal - run project convery local as tools https://github.com/smartystreets/goconvey"

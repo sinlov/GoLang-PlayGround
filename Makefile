@@ -17,16 +17,19 @@ DIST_ARCH_DOCKER ?= amd64
 # ignore used not matching mode
 ROOT_TEST_INVERT_MATCH ?= "vendor|go_fatal_error|robotn|shirou|go_robot"
 # set ignore of test case like grep -v -E "vendor|go_fatal_error" to ignore vendor and go_fatal_error package
-ROOT_TEST_LIST := $$(go list ./... | grep -v -E $(ROOT_TEST_INVERT_MATCH))
+ROOT_TEST_LIST := $(shell go list ./... | grep -v -E $(ROOT_TEST_INVERT_MATCH))
+ROOT_BENCHMARK_MATCH ?= "demojson"
+ROOT_BENCHMARK_LIST := $(shell go list ./... | grep -v -E $(ROOT_TEST_INVERT_MATCH) | grep $(ROOT_BENCHMARK_MATCH) )
 # test max time
 ROOT_TEST_MAX_TIME := 1m
 
 ROOT_NAME ?= GoLang-PlayGround
 
-ROOT_BUILD_PATH ?= ./build
-ROOT_DIST ?= ./dist
-ROOT_REPO ?= ./dist
-ROOT_LOG_PATH ?= ./log
+ROOT_PATH ?= $(shell pwd)
+ROOT_BUILD_PATH ?= $(ROOT_PATH)/build
+ROOT_DIST ?= $(ROOT_PATH)/dist
+ROOT_REPO ?= $(ROOT_PATH)/dist
+ROOT_LOG_PATH ?= $(ROOT_PATH)/log
 ROOT_TEST_BUILD_PATH ?= $(ROOT_BUILD_PATH)/test/$(DIST_VERSION)
 ROOT_TEST_DIST_PATH ?= $(ROOT_DIST)/test/$(DIST_VERSION)
 ROOT_TEST_OS_DIST_PATH ?= $(ROOT_DIST)/$(DIST_OS)/test/$(DIST_VERSION)
@@ -87,6 +90,11 @@ init:
 	@echo "~> you can use [ make help ] see more task"
 	-GOPROXY="$(ENV_GO_PROXY)" GO111MODULE=on go mod vendor
 
+info:
+	@echo "= print info start"
+	@echo "ROOT_TEST_LIST -> $(ROOT_TEST_LIST)"
+	@echo "ROOT_BENCHMARK_LIST -> $(ROOT_BENCHMARK_LIST)"
+
 buildMain:
 	@echo "-> start build local OS"
 	@go build -o build/main main.go
@@ -108,7 +116,7 @@ test:
 
 testBenchmem:
 	@echo "=> run test benchmem start"
-	@go test -test.benchmem
+	@go test -test.v -bench="." $(ROOT_BENCHMARK_LIST)
 
 localIPLinux:
 	@echo "=> now run as docker with linux"
