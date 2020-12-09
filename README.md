@@ -1,6 +1,6 @@
 ----
+[![go-last](https://github.com/sinlov/GoLang-PlayGround/workflows/go-last/badge.svg?branch=master)](https://github.com/sinlov/GoLang-PlayGround/actions)
 [![TravisBuildStatus](https://api.travis-ci.org/sinlov/GoLang-PlayGround.svg?branch=master)](https://travis-ci.org/sinlov/GoLang-PlayGround)
-[![go-last](https://github.com/sinlov/GoLang-PlayGround/workflows/go-last/badge.svg?branch=main)](https://github.com/sinlov/GoLang-PlayGround/actions)
 ----
 [![GoDoc](https://godoc.org/github.com/sinlov/GoLang-PlayGround?status.png)](https://godoc.org/github.com/sinlov/GoLang-PlayGround/)
 [![GoReportCard](https://goreportcard.com/badge/github.com/sinlov/GoLang-PlayGround)](https://goreportcard.com/report/github.com/sinlov/GoLang-PlayGround)
