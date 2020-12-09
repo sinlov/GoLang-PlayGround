@@ -118,6 +118,10 @@ testBenchmem:
 	@echo "=> run test benchmem start"
 	@go test -test.v -bench="." $(ROOT_BENCHMARK_LIST)
 
+testCoverage:
+	@echo "=> run test coverage start"
+	@go test -cover -coverprofile=coverage.txt -covermode=atomic -v $(ROOT_TEST_LIST)
+
 localIPLinux:
 	@echo "=> now run as docker with linux"
 	@echo "local ip address is: $(ROOT_LOCAL_IP_V4_LINUX)"

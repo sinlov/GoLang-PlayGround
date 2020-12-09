@@ -10,12 +10,13 @@ matrix:
     - go: tip
 
 install:
-  - make travisTest
-  - make travisBenchmem
+  - export GO111MODULE=on
+  - go get -t -v $(go list ./... | grep -v -E "vendor|go_fatal_error|robotn|shirou|go_robot")
+  - go test -test.v -bench="." $(go list ./... | grep -v -E "vendor|go_fatal_error|robotn|shirou|go_robot" | grep "demojson")
 
 script:
-  - GO111MODULE=on
-  - make travisConvey
+  - export GO111MODULE=on
+  - go test -cover -coverprofile=coverage.txt -covermode=atomic -v $(go list ./... | grep -v -E "vendor|go_fatal_error|robotn|shirou|go_robot")
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
