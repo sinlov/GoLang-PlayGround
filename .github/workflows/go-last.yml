@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  CODECOV_TOKEN: '${{ secrets.CODECOV_TOKEN }}'
+
 jobs:
 
   build:
