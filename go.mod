@@ -13,6 +13,7 @@ require (
 	github.com/go-vgo/robotgo v0.0.0-20191208171620-ff82bb5c96ef
 	github.com/google/uuid v1.1.1
 	github.com/ideazxy/iso8583 v0.0.0-20160317060925-d06dcb8f1fc4
+	github.com/ipfs/go-cid v0.0.7
 	github.com/json-iterator/go v1.1.10
 	github.com/kjk/betterguid v0.0.0-20170621091430-c442874ba63a
 	github.com/lithammer/shortuuid v3.0.0+incompatible
