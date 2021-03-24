@@ -18,6 +18,7 @@ require (
 	github.com/kjk/betterguid v0.0.0-20170621091430-c442874ba63a
 	github.com/lithammer/shortuuid v3.0.0+incompatible
 	github.com/mailru/easyjson v0.7.6
+	github.com/multiformats/go-multihash v0.0.13
 	github.com/oklog/ulid v1.3.1
 	github.com/pquerna/ffjson v0.0.0-20190930134022-aa0246cd15f7
 	github.com/rs/xid v1.2.1
