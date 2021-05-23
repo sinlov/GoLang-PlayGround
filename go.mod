@@ -24,6 +24,7 @@ require (
 	github.com/rs/xid v1.2.1
 	github.com/satori/go.uuid v1.2.0
 	github.com/segmentio/ksuid v1.0.2
+	github.com/shirou/gopsutil v2.20.9+incompatible // indirect
 	github.com/sinlov/fastEncryptDecode v0.0.0-20191203102542-905b1b5ccec9
 	github.com/smartystreets/goconvey v1.6.4
 	github.com/sony/sonyflake v1.0.0
