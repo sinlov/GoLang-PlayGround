@@ -1,47 +1,53 @@
-# this file must use as base Makefile
+# this file must use as base Makefile and add
 
-ROOT_VENDOR_PATH := $(ROOT_PATH)/vendor
-ROOT_GO_SUM_PATH := $(ROOT_PATH)/go.sum
+## can use as: go env -w GOPROXY=https://goproxy.cn,direct
 
-modVerify:
-	# in GOPATH must use GO111MODULE=on go mod init to init
-	-GOPROXY="$(ENV_GO_PROXY)" GO111MODULE=on go mod verify
-
-modDownload:
-	-GOPROXY="$(ENV_GO_PROXY)" GO111MODULE=on go mod download
-	-GOPROXY="$(ENV_GO_PROXY)" GO111MODULE=on go mod vendor
-
-modTidy:
-	-GOPROXY="$(ENV_GO_PROXY)" GO111MODULE=on go mod tidy
-
-modUpdate:
-	-GOPROXY="$(ENV_GO_PROXY)" GO111MODULE=on go get -u ./...
-
-dep: modVerify modDownload
-	@echo "just check depends info below"
-
-depClean:
-	@echo "just clean depends start"
-	@if [ -d ${ROOT_VENDOR_PATH} ]; \
-	then rm -rf vendor && echo "~> cleaned ${ROOT_VENDOR_PATH}"; \
-	else echo "~> has cleaned ${ROOT_VENDOR_PATH}"; \
+modClean:
+	@echo "=> try to clean ./go.sum and ./vendor"
+	@if [ -f ./go.sum ]; \
+	then rm -f ./go.sum && echo "~> cleaned file ./go.sum"; \
+	else echo "~> has cleaned file ./go.sum"; \
 	fi
-	@if [ -f ${ROOT_GO_SUM_PATH} ]; \
-	then rm -f vendor && echo "~> cleaned ${ROOT_GO_SUM_PATH}"; \
-	else echo "~> has cleaned ${ROOT_GO_SUM_PATH}"; \
+	@if [ -d ./vendor ]; \
+	then rm -rf ./vendor && echo "~> cleaned folder ./vendor";\
+	else echo "~> has cleaned folder ./vendor"; \
 	fi
-	@echo "just clean depends end"
+
+modList:
+	@echo "=> show go list -m -json all"
+	go list -m -json all
 
 modGraphDependencies:
-	GOPROXY="$(ENV_GO_PROXY)" GO111MODULE=on go mod graph
+	GO111MODULE=on go mod graph
 
+modVerify:
+	# in $$GOPATH must use [ GO111MODULE=on go mod ] to use
+	# open goproxy add env: [ go env -w GOPROXY=https://goproxy.cn,direct ]
+	GO111MODULE=on go mod verify
+
+modDownload:
+	GO111MODULE=on go mod download && GO111MODULE=on go mod vendor
+
+modTidy:
+	GO111MODULE=on go mod tidy
+
+dep: modVerify modDownload
+	@echo "-> just check depends finish"
+
+modFetch:
+	@echo "can fetch last version as"
+	go list -mod=mod -m -versions github.com/stretchr/testify | awk '{print $$1 " lastest: " $$NF}'
+
+# print as: $make helpGoMod
 helpGoMod:
 	@echo "Help: MakeGoMod.mk"
 	@echo "this project use go mod, so golang version must 1.12+"
-	@echo "go mod evn: GOPROXY=$(ENV_GO_PROXY)"
-	@echo "~> make dep                  - check depends of project and download all, child task is: modVerify modDownload"
-	@echo "~> make depClean             - clean path of ${ROOT_VENDOR_PATH} and ${ROOT_VENDOR_PATH}"
+	@echo "~> make modClean             - will clean ./go.sum and ./vendor"
+	@echo "~> make modList              - list all depends as: go list -m -json all"
 	@echo "~> make modGraphDependencies - see depends graph of this project"
-	@echo "~> make modTidy              - tidy depends graph of project"
-	@echo "~> make modUpdate            - update depends to new"
+	@echo "~> make modVerify            - verify as: go mod verify"
+	@echo "~> make modDownload          - download as: go mod download and go mod vendor"
+	@echo "~> make modTidy              - tidy depends graph of project as go mod tidy"
+	@echo "~> make dep                  - check depends of project and download all, parent task is: modVerify modDownload"
+	@echo "~> make modFetch             - check last version of one lib"
 	@echo ""
