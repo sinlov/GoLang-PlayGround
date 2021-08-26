@@ -2,7 +2,9 @@ package hex_code
 
 import (
 	"bytes"
+	"fmt"
 	"strconv"
+	"strings"
 )
 
 func ByteArr2HexStr(bArr []byte) string {
@@ -15,6 +17,44 @@ func ByteArr2HexStr(bArr []byte) string {
 		buf.WriteString(s)
 	}
 	return buf.String()
+}
+
+func ByteArr2HexStrArr(bArr []byte) string {
+	buf := new(bytes.Buffer)
+	for _, b := range bArr {
+		s := strconv.FormatInt(int64(b&0xff), 16)
+		if len(s) == 1 {
+			buf.WriteString("0")
+		}
+		buf.WriteString(s)
+		buf.WriteString(" ")
+	}
+	return strings.Trim(buf.String(), "")
+}
+
+func ByteArr2HexASCII(bArr []byte) string {
+	buf := new(bytes.Buffer)
+	count := 0
+	line := 0
+	buf.WriteString(fmt.Sprintf("%08d ", line))
+	for _, b := range bArr {
+		s := strconv.FormatInt(int64(b&0xff), 16)
+		if len(s) == 1 {
+			buf.WriteString("0")
+		}
+		buf.WriteString(s)
+		buf.WriteString(" ")
+		count++
+		if count%8 == 0 {
+			buf.WriteString(" ")
+		}
+		if count%16 == 0 {
+			buf.WriteString("\n")
+			line++
+			buf.WriteString(fmt.Sprintf("%08d ", line))
+		}
+	}
+	return strings.Trim(buf.String(), "")
 }
 
 func HexStr2ByteArr(hexString string) ([]byte, error) {

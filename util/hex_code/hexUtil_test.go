@@ -16,6 +16,24 @@ func TestByteArr2HexStr(t *testing.T) {
 	assert.Equal(t, "31323334357177657274", hexString)
 }
 
+func TestByteArr2HexStrArr(t *testing.T) {
+	str4Hex := "12345qwert"
+	t.Logf("str4Hex %s", str4Hex)
+	hexStr := []byte(str4Hex)
+	t.Logf("hexStr: %b", hexStr)
+	hexString := ByteArr2HexStrArr(hexStr)
+	t.Logf("ByteArr2HexStrArr\n%s", hexString)
+}
+
+func TestByteArr2HexASCII(t *testing.T) {
+	str4Hex := "12345qwertwfbadaiaafaadfhaida"
+	t.Logf("str4Hex %s", str4Hex)
+	hexStr := []byte(str4Hex)
+	t.Logf("hexStr: %b", hexStr)
+	hexString := ByteArr2HexASCII(hexStr)
+	t.Logf("TestByteArr2HexASCII\n%s", hexString)
+}
+
 func TestHexStr2ByteArr(t *testing.T) {
 	t.Logf("\nTestHexStr2ByteArr")
 	str4Hex := "12345qwert"
