@@ -2,6 +2,7 @@ package hex_code
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"strconv"
 	"strings"
@@ -70,4 +71,29 @@ func HexStr2ByteArr(hexString string) ([]byte, error) {
 		slice[i] = byte(value & 0xFF)
 	}
 	return slice, nil
+}
+
+func HexStr2ByteArrUnSafe(hexString string) []byte {
+	byteArr, err := HexStr2ByteArr(hexString)
+	if err != nil {
+		return nil
+	}
+	return byteArr
+}
+
+func BlockCopy(src []byte, srcOffset int, dst []byte, dstOffset, count int) (bool, error) {
+	srcLen := len(src)
+	if srcOffset > srcLen || count > srcLen || srcOffset+count > srcLen {
+		return false, errors.New("the src buffer index is out of rang")
+	}
+	dstLen := len(dst)
+	if dstOffset > dstLen || count > dstLen || dstOffset+count > dstLen {
+		return false, errors.New("the dst buffer index is out of rang")
+	}
+	index := 0
+	for i := srcOffset; i < srcOffset+count; i++ {
+		dst[dstOffset+index] = src[srcOffset+index]
+		index++
+	}
+	return true, nil
 }
