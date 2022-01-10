@@ -1,9 +1,9 @@
 package go_time_count
 
 import (
-	"time"
-	"strings"
 	"fmt"
+	"strings"
+	"time"
 )
 
 func StringsJoinSliceStringTime(slice []string) interface{} {

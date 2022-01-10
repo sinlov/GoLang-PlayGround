@@ -5,6 +5,7 @@ go 1.15
 require (
 	github.com/BurntSushi/toml v0.3.1 // indirect
 	github.com/alecthomas/log4go v0.0.0-20180109082532-d146e6b86faa
+	github.com/antlabs/timer v0.0.5
 	github.com/bitly/go-simplejson v0.5.0
 	github.com/buger/jsonparser v1.0.0
 	github.com/bwmarrin/snowflake v0.3.0
@@ -28,7 +29,7 @@ require (
 	github.com/sinlov/fastEncryptDecode v0.0.0-20191203102542-905b1b5ccec9
 	github.com/smartystreets/goconvey v1.6.4
 	github.com/sony/sonyflake v1.0.0
-	github.com/stretchr/testify v1.3.0
+	github.com/stretchr/testify v1.6.1
 	github.com/ugorji/go/codec v1.2.1
 	github.com/ugorji/go/codec/codecgen v1.2.1 // indirect
 	github.com/xxtea/xxtea-go v0.0.0-20170828040851-35c4b17eecf6
