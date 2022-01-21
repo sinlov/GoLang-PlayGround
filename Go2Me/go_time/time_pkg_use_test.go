@@ -7,6 +7,15 @@ import (
 	"time"
 )
 
+func TestNowUnix(t *testing.T) {
+	unix := time.Now().Unix()
+	t.Logf("unix %v", unix)
+	micro := time.Now().UnixMicro()
+	t.Logf("micro %v", micro)
+	milli := time.Now().UnixMilli()
+	t.Logf("milli %v", milli)
+}
+
 func TestNowTimeStr(t *testing.T) {
 	convey.Convey("TestNowTimeStr", t, func() {
 		// mock
