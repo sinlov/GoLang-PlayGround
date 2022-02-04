@@ -3,7 +3,6 @@ module github.com/sinlov/GoLang-PlayGround
 go 1.15
 
 require (
-	github.com/BurntSushi/toml v0.3.1 // indirect
 	github.com/alecthomas/log4go v0.0.0-20180109082532-d146e6b86faa
 	github.com/bitly/go-simplejson v0.5.0
 	github.com/buger/jsonparser v1.0.0
@@ -30,9 +29,7 @@ require (
 	github.com/sony/sonyflake v1.0.0
 	github.com/stretchr/testify v1.3.0
 	github.com/ugorji/go/codec v1.2.1
-	github.com/ugorji/go/codec/codecgen v1.2.1 // indirect
 	github.com/xxtea/xxtea-go v0.0.0-20170828040851-35c4b17eecf6
-	golang.org/x/mod v0.4.0 // indirect
-	golang.org/x/tools v0.0.0-20201208233053-a543418bbed2 // indirect
-	gopkg.in/yaml.v2 v2.2.7
+	golang.org/x/net v0.0.0-20201021035429-f5854403a974 // indirect
+	gopkg.in/yaml.v2 v2.4.0
 )
