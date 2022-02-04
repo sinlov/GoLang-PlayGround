@@ -2,9 +2,9 @@ name: go-last
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 env:
   CODECOV_TOKEN: '${{ secrets.CODECOV_TOKEN }}'
@@ -28,7 +28,7 @@ jobs:
     - name: Get dependencies
       run: |
         if [ -f Gopkg.toml ]; then
-            curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+            curl https://raw.githubusercontent.com/golang/dep/main/install.sh | sh
             dep ensure
         fi
         make dep
