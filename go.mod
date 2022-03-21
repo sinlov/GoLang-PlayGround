@@ -20,6 +20,7 @@ require (
 	github.com/mailru/easyjson v0.7.6
 	github.com/multiformats/go-multihash v0.0.13
 	github.com/oklog/ulid v1.3.1
+	github.com/pkg/profile v1.6.0
 	github.com/pquerna/ffjson v0.0.0-20190930134022-aa0246cd15f7
 	github.com/rs/xid v1.2.1
 	github.com/satori/go.uuid v1.2.0
