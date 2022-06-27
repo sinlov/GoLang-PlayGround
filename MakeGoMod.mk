@@ -18,18 +18,21 @@ modList:
 	go list -m -json all
 
 modGraphDependencies:
-	GO111MODULE=on go mod graph
+	go mod graph
 
 modVerify:
 	# in $$GOPATH must use [ GO111MODULE=on go mod ] to use
 	# open goproxy add env: [ go env -w GOPROXY=https://goproxy.cn,direct ]
-	GO111MODULE=on go mod verify
+	go mod verify
 
 modDownload:
-	GO111MODULE=on go mod download && GO111MODULE=on go mod vendor
+	go mod download
+
+modVendor:
+	go mod vendor
 
 modTidy:
-	GO111MODULE=on go mod tidy
+	go mod tidy
 
 dep: modVerify modDownload
 	@echo "-> just check depends finish"
