@@ -119,18 +119,22 @@ func TestFolder(t *testing.T) {
 		t.Error(err)
 	}
 
+	innerLev1JsonCnt := 5
+	innerLev1txtCnt := 2
+
 	innerLev1Folder := folder.PathJoin(testDataPath, "inner_1")
-	err = addTextFileByTry(innerLev1Folder, "data", "json", 5)
+	err = addTextFileByTry(innerLev1Folder, "data", "json", innerLev1JsonCnt)
 	if err != nil {
 		t.Error(err)
 	}
-	err = addTextFileByTry(innerLev1Folder, "example", "txt", 5)
+	err = addTextFileByTry(innerLev1Folder, "example", "txt", innerLev1txtCnt)
 	if err != nil {
 		t.Error(err)
 	}
 
+	innerLev2JsonCnt := 4
 	innerLev2Folder := folder.PathJoin(innerLev1Folder, "inner_2")
-	err = addTextFileByTry(innerLev2Folder, "data", "json", 5)
+	err = addTextFileByTry(innerLev2Folder, "data", "json", innerLev2JsonCnt)
 	if err != nil {
 		t.Error(err)
 	}
@@ -149,4 +153,26 @@ func TestFolder(t *testing.T) {
 	rootFolderList := folder.PathFolderList(testDataPath)
 	assert.NotEmpty(t, rootFolderList)
 	assert.Equal(t, 1, len(rootFolderList))
+
+	fileBySuffixJson, err := folder.WalkAllFileBySuffix(testDataPath, "json")
+	if err != nil {
+		t.Error(err)
+	}
+	assert.NotEmpty(t, fileBySuffixJson)
+	assert.Equal(t,
+		rootLevCnt+innerLev1JsonCnt+innerLev2JsonCnt,
+		len(fileBySuffixJson))
+
+	matchJsonPath, err := folder.WalkAllByMatchPath(testDataPath, `.*.json$`, true)
+
+	assert.NotEmpty(t, matchJsonPath)
+	assert.Equal(t,
+		rootLevCnt+innerLev1JsonCnt+innerLev2JsonCnt,
+		len(matchJsonPath))
+
+	matchInnerPath, err := folder.WalkAllByMatchPath(testDataPath, `^.*inner_[0-9]$`, false)
+	assert.NotEmpty(t, matchInnerPath)
+	assert.Equal(t,
+		2,
+		len(matchInnerPath))
 }

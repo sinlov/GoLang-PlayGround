@@ -50,25 +50,25 @@ func envCheck(t *testing.T) bool {
 
 // test case file tools start
 
-var currentFolderAbsPath = ""
+var currentTestDataFolderAbsPath = ""
 
 func getOrCreateTestDataFolderFullPath() (string, error) {
-	if currentFolderAbsPath != "" {
-		return currentFolderAbsPath, nil
+	if currentTestDataFolderAbsPath != "" {
+		return currentTestDataFolderAbsPath, nil
 	}
 	currentFolderPath, err := getCurrentFolderPath()
 	if err != nil {
 		return "", err
 	}
-	currentFolderAbsPath = path.Join(currentFolderPath, "testdata")
-	if !pathExistsFast(currentFolderAbsPath) {
-		err := mkdir(currentFolderAbsPath)
+	currentTestDataFolderAbsPath = path.Join(currentFolderPath, "testdata")
+	if !pathExistsFast(currentTestDataFolderAbsPath) {
+		err := mkdir(currentTestDataFolderAbsPath)
 		if err != nil {
-			currentFolderAbsPath = ""
+			currentTestDataFolderAbsPath = ""
 			return "", err
 		}
 	}
-	return currentFolderAbsPath, nil
+	return currentTestDataFolderAbsPath, nil
 }
 
 func goldenDataSaveFast(t *testing.T, data []byte, extraName string) error {
