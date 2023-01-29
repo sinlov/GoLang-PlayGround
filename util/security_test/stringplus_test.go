@@ -1,6 +1,7 @@
-package security
+package security_test
 
 import (
+	"github.com/sinlov/GoLang-PlayGround/util/security"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -20,7 +21,7 @@ func TestReverseString(t *testing.T) {
 	}
 	// do
 	for _, test := range tests {
-		result := ReverseString(test.source)
+		result := security.ReverseString(test.source)
 		// verify
 		t.Logf("source: %v, result: %v", test.source, result)
 		assert.Equal(t, test.want, result)

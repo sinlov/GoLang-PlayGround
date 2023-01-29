@@ -69,7 +69,7 @@ func Base64TripleURLDecoding(input string) (string, error) {
 }
 
 func ReverseBase64URLDecode(input string) (string, error) {
-	base64Code := reverseBase64Code(input)
+	base64Code := ReverseBase64Code(input)
 	src := []byte(base64Code)
 	enc := base64.URLEncoding
 
@@ -81,7 +81,7 @@ func ReverseBase64URLDecode(input string) (string, error) {
 	return string(buf[:n]), nil
 }
 
-func reverseBase64Code(input string) string {
+func ReverseBase64Code(input string) string {
 	midSource := ReverseString(input)
 	code := len([]byte(midSource)) * 6
 	if code > 24 {

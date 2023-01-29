@@ -11,7 +11,6 @@ import (
 	"path"
 	"path/filepath"
 	"runtime"
-	"strings"
 )
 
 // GetCurrentExecPath get exec path
@@ -20,9 +19,10 @@ func GetCurrentExecPath() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	i := strings.LastIndex(s, "\\")
-	p := string(s[0 : i+1])
-	return p, nil
+	return s, nil
+	//i := strings.LastIndex(s, "\\")
+	//p := string(s[0 : i+1])
+	//return p, nil
 }
 
 // GetCurrentFilePath run path
@@ -61,6 +61,7 @@ func Mkdir(path string) error {
 	return nil
 }
 
+// RmDir remove dir by path
 func RmDir(path string, force bool) error {
 	if force {
 		return os.RemoveAll(path)
@@ -75,6 +76,7 @@ func RmDir(path string, force bool) error {
 	return fmt.Errorf("remove dir not exist path: %s , use force can cover this err", path)
 }
 
+// RmDirForce remove dir force
 func RmDirForce(path string) error {
 	return RmDir(path, true)
 }
@@ -153,22 +155,58 @@ func PathFileList(path string) []string {
 	return dirList
 }
 
-// ReadFileAsJson read file as json
-func ReadFileAsJson(path string, v interface{}) error {
+// ReadFileAsByte read file as byte array
+func ReadFileAsByte(path string) ([]byte, error) {
 	exists, err := PathExists(path)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	if !exists {
-		return fmt.Errorf("path not exist %v", path)
+		return nil, fmt.Errorf("path not exist %v", path)
 	}
 	data, err := os.ReadFile(path)
 	if err != nil {
-		return err
+		return nil, fmt.Errorf("path: %s read err: %v", path, err)
 	}
-	err = json.Unmarshal(data, v)
+
+	return data, nil
+}
+
+// ReadFileAsJson read file as json
+func ReadFileAsJson(path string, v interface{}) error {
+	fileAsByte, err := ReadFileAsByte(path)
+	err = json.Unmarshal(fileAsByte, v)
 	if err != nil {
-		return err
+		return fmt.Errorf("path: %s , read file as json err: %v", path, err)
+	}
+	return nil
+}
+
+// WriteFileByByte write bytes to file
+// path most use Abs Path
+// data []byte
+// fileMod os.FileMode(0666) or os.FileMode(0644)
+// coverage true will coverage old
+func WriteFileByByte(path string, data []byte, fileMod fs.FileMode, coverage bool) error {
+	if !coverage {
+		exists, err := PathExists(path)
+		if err != nil {
+			return err
+		}
+		if exists {
+			return fmt.Errorf("not coverage, which path exist %v", path)
+		}
+	}
+	parentPath := filepath.Dir(path)
+	if !PathExistsFast(parentPath) {
+		err := os.MkdirAll(parentPath, fileMod)
+		if err != nil {
+			return fmt.Errorf("can not WriteFileByByte at new dir at mode: %v , at parent path: %v", fileMod, parentPath)
+		}
+	}
+	err := os.WriteFile(path, data, fileMod)
+	if err != nil {
+		return fmt.Errorf("write data at path: %v, err: %v", path, err)
 	}
 	return nil
 }
@@ -199,24 +237,9 @@ func WriteFileAsJson(path string, v interface{}, fileMod fs.FileMode, coverage, 
 		if err != nil {
 			return err
 		}
-		err = os.WriteFile(path, str.Bytes(), fileMod)
-		if err != nil {
-			return err
-		}
-		return nil
+		return WriteFileByByte(path, str.Bytes(), fileMod, coverage)
 	}
-	parentPath := filepath.Dir(path)
-	if !PathExistsFast(parentPath) {
-		err := os.MkdirAll(parentPath, fileMod)
-		if err != nil {
-			return err
-		}
-	}
-	err = os.WriteFile(path, data, fileMod)
-	if err != nil {
-		return err
-	}
-	return nil
+	return WriteFileByByte(path, data, fileMod, coverage)
 }
 
 // WriteFileAsJsonBeauty write json file as 0666 and beauty

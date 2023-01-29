@@ -1,7 +1,8 @@
-package security
+package security_test
 
 import (
 	"fmt"
+	"github.com/sinlov/GoLang-PlayGround/util/security"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -21,7 +22,7 @@ func TestBase64TripleURLEncoding(t *testing.T) {
 	}
 	// do
 	for _, test := range tests {
-		encoding := Base64TripleURLEncoding(test.source)
+		encoding := security.Base64TripleURLEncoding(test.source)
 		//t.Logf("Base64TripleURLEncoding\nFrom: %v\nTo %v", test.source, encoding)
 		// verify
 		assert.Equal(t, test.want, encoding)
@@ -43,7 +44,7 @@ func TestBase64TripleURLDecoding(t *testing.T) {
 	}
 	// do
 	for _, test := range tests {
-		decoding, err := Base64TripleURLDecoding(test.source)
+		decoding, err := security.Base64TripleURLDecoding(test.source)
 		if err != nil {
 			t.Fatalf("TestBase64TripleURLDecoding err at %v, info: %v", test.name, err)
 		}
@@ -58,7 +59,7 @@ func TestBase64URLEncoding(t *testing.T) {
 	url := `http://www.baidu.com/adad/1232312/#1233?id=123`
 	want := `aHR0cDovL3d3dy5iYWlkdS5jb20vYWRhZC8xMjMyMzEyLyMxMjMzP2lkPTEyMw==`
 	// do
-	encoding := Base64URLEncoding(url)
+	encoding := security.Base64URLEncoding(url)
 	// verify
 	//t.Logf("encoding from %v to %v", url, encoding)
 	assert.Equal(t, want, encoding)
@@ -69,7 +70,7 @@ func TestBase64URLDecoding(t *testing.T) {
 	source := `aHR0cDovL3d3dy5iYWlkdS5jb20vYWRhZC8xMjMyMzEyLyMxMjMzP2lkPTEyMw==`
 	want := `http://www.baidu.com/adad/1232312/#1233?id=123`
 	// do
-	out, err := Base64URLDecoding(source)
+	out, err := security.Base64URLDecoding(source)
 	if err != nil {
 		t.Fatalf("TestBase64URLDecoding error %v", err)
 	}
@@ -82,7 +83,7 @@ func TestBase64StdEncoding(t *testing.T) {
 	source := `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=`
 	want := `QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVphYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ejAxMjM0NTY3ODkrLz0=`
 	// do
-	out := Base64StdEncoding(source)
+	out := security.Base64StdEncoding(source)
 	// verify
 	assert.Equal(t, want, out)
 }
@@ -92,7 +93,7 @@ func TestBase64StdDecoding(t *testing.T) {
 	source := `QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVphYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ejAxMjM0NTY3ODkrLz0=`
 	want := `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=`
 	// do
-	out, err := Base64StdDecoding(source)
+	out, err := security.Base64StdDecoding(source)
 	if err != nil {
 		t.Fatalf("TestBase64StdDecoding err: %v", err)
 	}
@@ -151,12 +152,12 @@ func TestReverseBase64Code(t *testing.T) {
 	// do
 	for _, test := range tests {
 		//testByte := []byte(test.source)
-		reverse := reverseBase64Code(test.source)
+		reverse := security.ReverseBase64Code(test.source)
 		t.Logf("reverseBase64Code\nFrom: %v\nTo %v", test.source, reverse)
 		// verify
 		assert.Equal(t, test.want, reverse)
 		reverse = fmt.Sprintf("%v", reverse)
-		out, err := Base64StdDecoding(reverse)
+		out, err := security.Base64StdDecoding(reverse)
 		if err != nil {
 			t.Fatalf("reverseBase64Code and reverseBase64Code error %v", err)
 		}
@@ -180,7 +181,7 @@ func TestReverseBase64URLDecode(t *testing.T) {
 
 	// do
 	for _, test := range tests {
-		decoding, err := ReverseBase64URLDecode(test.source)
+		decoding, err := security.ReverseBase64URLDecode(test.source)
 		if err != nil {
 			t.Fatalf("ReverseBase64URLDecode err at %v, info: %v", test.name, err)
 		}

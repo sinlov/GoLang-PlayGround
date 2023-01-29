@@ -1,7 +1,8 @@
-package security
+package security_test
 
 import (
 	"fmt"
+	"github.com/sinlov/GoLang-PlayGround/util/security"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -21,7 +22,7 @@ func TestURLPathEncode(t *testing.T) {
 	}
 	// do
 	for _, test := range tests {
-		result := URLPathEncode(test.source)
+		result := security.URLPathEncode(test.source)
 		// verify
 		t.Logf("source: %v, result: %v", test.source, result)
 		assert.Equal(t, test.want, result)
@@ -43,7 +44,7 @@ func TestURLPathDecode(t *testing.T) {
 	}
 	// do
 	for _, test := range tests {
-		result, err := URLPathDecode(test.source)
+		result, err := security.URLPathDecode(test.source)
 		if err != nil {
 			t.Fatalf("TestURLPathDecode error: %v", err)
 		}
@@ -68,7 +69,7 @@ func TestURLQueryEncode(t *testing.T) {
 	}
 	// do
 	for _, test := range tests {
-		result := URLQueryEncode(test.source)
+		result := security.URLQueryEncode(test.source)
 		// verify
 		t.Logf("source: %v, result: %v", test.source, result)
 		assert.Equal(t, test.want, result)
@@ -90,7 +91,7 @@ func TestURLQueryDecode(t *testing.T) {
 	}
 	// do
 	for _, test := range tests {
-		result, err := URLQueryDecode(test.source)
+		result, err := security.URLQueryDecode(test.source)
 		if err != nil {
 			t.Fatalf("TestURLPathDecode error: %v", err)
 		}
@@ -124,7 +125,7 @@ func TestUnicodeDecode(t *testing.T) {
 	}
 	// do
 	for _, test := range tests {
-		result, err := UnicodeDecode(test.source)
+		result, err := security.UnicodeDecode(test.source)
 		// verify
 		if err != nil {
 			t.Logf("TestUnicodeDecode error: %v", err)
