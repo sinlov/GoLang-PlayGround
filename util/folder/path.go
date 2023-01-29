@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"io/fs"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"path"
@@ -53,6 +52,51 @@ func PathExistsFast(path string) bool {
 	return exists
 }
 
+// Mkdir will use FileMode 0766
+func Mkdir(path string) error {
+	err := os.MkdirAll(path, os.FileMode(0766))
+	if err != nil {
+		return fmt.Errorf("fail MkdirAll at path: %s , err: %v", path, err)
+	}
+	return nil
+}
+
+func RmDir(path string, force bool) error {
+	if force {
+		return os.RemoveAll(path)
+	}
+	exists, err := PathExists(path)
+	if err != nil {
+		return err
+	}
+	if exists {
+		return os.RemoveAll(path)
+	}
+	return fmt.Errorf("remove dir not exist path: %s , use force can cover this err", path)
+}
+
+func RmDirForce(path string) error {
+	return RmDir(path, true)
+}
+
+// PathIsDir exists path is dir or false
+func PathIsDir(path string) bool {
+	s, err := os.Stat(path)
+	if err != nil {
+		return false
+	}
+	return s.IsDir()
+}
+
+// PathIsFile exists path is file or false
+func PathIsFile(path string) bool {
+	fi, e := os.Stat(path)
+	if e != nil {
+		return false
+	}
+	return !fi.IsDir()
+}
+
 // PathJoin is path.Join()
 func PathJoin(elem ...string) string {
 	return path.Join(elem...)
@@ -70,7 +114,7 @@ func PathFolderList(path string) []string {
 		return nil
 	}
 
-	fileInfos, err := ioutil.ReadDir(path)
+	fileInfos, err := os.ReadDir(path)
 	if err != nil {
 		return nil
 	}
@@ -93,7 +137,7 @@ func PathFileList(path string) []string {
 		return nil
 	}
 
-	fileInfos, err := ioutil.ReadDir(path)
+	fileInfos, err := os.ReadDir(path)
 	if err != nil {
 		return nil
 	}
