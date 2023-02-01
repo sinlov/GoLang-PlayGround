@@ -6,11 +6,13 @@ import (
 	"errors"
 	"fmt"
 	"io/fs"
+	"math/rand"
 	"os"
 	"path"
 	"path/filepath"
 	"runtime"
 	"testing"
+	"time"
 )
 
 const (
@@ -244,6 +246,17 @@ func writeFileAsJson(path string, v interface{}, fileMod fs.FileMode, coverage, 
 // writeFileAsJsonBeauty write json file as 0766 and beauty
 func writeFileAsJsonBeauty(path string, v interface{}, coverage bool) error {
 	return writeFileAsJson(path, v, os.FileMode(0766), coverage, true)
+}
+
+func randomStr(cnt uint) string {
+	var letters = []byte("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")
+	result := make([]byte, cnt)
+	keyL := len(letters)
+	rand.Seed(time.Now().Unix())
+	for i := range result {
+		result[i] = letters[rand.Intn(keyL)]
+	}
+	return string(result)
 }
 
 // test case file tools end
