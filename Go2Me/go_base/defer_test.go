@@ -1,9 +1,9 @@
 package go_base
 
 import (
+	"fmt"
 	"os"
 	"testing"
-	"fmt"
 )
 
 //即延迟（defer）语句，你可以在函数中添加多个defer语句。

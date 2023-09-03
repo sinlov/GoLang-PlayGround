@@ -1,8 +1,8 @@
 package go_base
 
 import (
-	"testing"
 	"fmt"
+	"testing"
 )
 
 // 声明新的类型，作为其它类型的属性或字段的容器
@@ -19,7 +19,7 @@ func Test_person(t *testing.T) {
 	fmt.Println("This persion p name is ", P.name)
 
 	fP := person{"Tom", 25}
-	fvP := person{age:24, name:"Tom"}
+	fvP := person{age: 24, name: "Tom"}
 	// 这个时候 pP 的类型是 *person
 	pP := new(person)
 	fmt.Println(fP.name)
@@ -44,7 +44,7 @@ func Test_older_person(t *testing.T) {
 	tom.name, tom.age = "Tom", 18
 
 	// 两个字段都写清楚的初始化
-	bob := person{age:25, name:"Bob"}
+	bob := person{age: 25, name: "Bob"}
 
 	// 按照struct定义顺序初始化值
 	paul := person{"Paul", 43}

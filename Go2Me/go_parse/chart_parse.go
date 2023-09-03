@@ -15,13 +15,13 @@ func Utf82Unicode() {
 func Unicode2utf8() {
 	bStr := "转换前的中文"
 	enUnicode := utf82Unicode(bStr)
-	enUtf8 :=unicode2Utf8(enUnicode)
+	enUtf8 := unicode2Utf8(enUnicode)
 	fmt.Println(bStr, enUnicode, enUtf8)
 }
 
-func utf82Unicode(text string) string  {
-	cover := strconv.QuoteToASCII(text);
-	res := cover[1 : len(cover) - 1]
+func utf82Unicode(text string) string {
+	cover := strconv.QuoteToASCII(text)
+	res := cover[1 : len(cover)-1]
 	return res
 }
 

@@ -7,6 +7,7 @@ import (
 )
 
 // Sort the map key (int \ float \ string) to traverse the map
+//
 //	sortMap -> The map to be sorted
 //	sortFunc -> Map traversal received, the input parameters should match the key and value of the map. like func(k int, val string)
 //	return nil is success, other sort error

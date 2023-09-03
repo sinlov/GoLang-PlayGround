@@ -1,8 +1,8 @@
 package go_base
 
 import (
-	"testing"
 	"fmt"
+	"testing"
 )
 
 // 写Go代码的时候经常用到import这个命令用来导入包文件

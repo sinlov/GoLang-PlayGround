@@ -1,15 +1,15 @@
 package go_error
 
 import (
-	"fmt"
 	"errors"
+	"fmt"
 )
 
 type equalError struct {
 	Num int
 }
 
-//error Error()
+// error Error()
 func (e equalError) Error() string {
 	return fmt.Sprintf("Now Number is %d , must less than 10", e.Num)
 }

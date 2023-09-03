@@ -1,3 +1,5 @@
+//go:build !test
+
 package time_wheel
 
 import (

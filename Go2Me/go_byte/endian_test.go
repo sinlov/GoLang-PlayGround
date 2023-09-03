@@ -42,7 +42,7 @@ func BenchmarkIsLittleEndian(b *testing.B) {
 		littleEndian := IsLittleEndian()
 		//b.Logf("is littleEndian: %v", littleEndian)
 		if littleEndian {
-			
+
 		}
 	}
 }

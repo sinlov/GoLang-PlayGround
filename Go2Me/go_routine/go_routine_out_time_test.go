@@ -11,15 +11,15 @@ func Test_try_count_sum_out(t *testing.T) {
 		args args
 	}{
 		{
-			name:"not time out",
-			args:args{
-				is_time_out:false,
+			name: "not time out",
+			args: args{
+				is_time_out: false,
 			},
 		},
 		{
-			name:"time out",
-			args:args{
-				is_time_out:true,
+			name: "time out",
+			args: args{
+				is_time_out: true,
 			},
 		},
 	}

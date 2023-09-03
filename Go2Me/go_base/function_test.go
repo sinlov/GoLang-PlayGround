@@ -2,8 +2,8 @@ package go_base
 
 import (
 	"fmt"
-	"testing"
 	l4g "github.com/alecthomas/log4go"
+	"testing"
 )
 
 // 函数是Go里面的核心设计，它通过关键字`func`来声明，它的格式如下：
@@ -43,7 +43,7 @@ func Test_if(t *testing.T) {
 
 func Test_goto(t *testing.T) {
 	i := 1
-	Here:
+Here:
 	l4g.Debug(i)
 	fmt.Println(i)
 	i++
@@ -54,7 +54,7 @@ func Test_goto(t *testing.T) {
 }
 
 func Test_for(t *testing.T) {
-	sum := 0;
+	sum := 0
 	for index := 0; index < 10; index++ {
 		sum += index
 	}
@@ -62,7 +62,7 @@ func Test_for(t *testing.T) {
 
 	//平行赋值i, j = i+1, j-1 忽略expression1和expression3
 	lSum := 1
-	for ; lSum < 1000; {
+	for lSum < 1000 {
 		lSum += lSum
 	}
 	fmt.Println("lSum to ", lSum)
@@ -71,7 +71,7 @@ func Test_for(t *testing.T) {
 
 	wSum := 1
 	for wSum < 1000 {
-		wSum += wSum;
+		wSum += wSum
 	}
 	fmt.Println("wSum to ", wSum)
 
@@ -87,7 +87,7 @@ func Test_for(t *testing.T) {
 	// break和continue还可以跟着标签，用来跳到多重循环中的外层循环
 
 	//for配合range可以用于读取slice和map的数据
-	rMap := map[string]float32{"C":5, "Go":4.5, "Python":4.5, "C++":2 }
+	rMap := map[string]float32{"C": 5, "Go": 4.5, "Python": 4.5, "C++": 2}
 	for fk, fv := range rMap {
 		fmt.Println("map's key:", fk)
 		fmt.Println("map's val:", fv)
@@ -153,26 +153,25 @@ func Test_mutli_function(t *testing.T) {
 	// Go函数支持变参。接受变参的函数是有着不定数量的参数的 这点更很多别的语言一样就是数组入参
 }
 
-
 //传指针使得多个函数能操作同一个对象
 
 //传指针比较轻量级 (8bytes),只是传内存地址，我们可以用指针传递体积大的结构体。
 //如果用参数值传递的话, 在每次copy上面就会花费相对较多的系统开销（内存和时间）。
 //go语言中channel，slice，map这三种类型的实现机制类似指针，所以可以直接传递，而不用取地址后传递指针
 
-//简单的一个函数，实现了参数+1的操作
+// 简单的一个函数，实现了参数+1的操作
 func add1(a *int) int {
 	// 请注意，
 	*a = *a + 1 // 修改了a的值
-	return *a // 返回新值
+	return *a   // 返回新值
 }
 
 func Test_point_add1(t *testing.T) {
 	x := 3
 
-	fmt.Println("x = ", x)  // 应该输出 "x = 3"
+	fmt.Println("x = ", x) // 应该输出 "x = 3"
 
-	x1 := add1(&x)  // 调用 add1(&x) 传x的地址
+	x1 := add1(&x) // 调用 add1(&x) 传x的地址
 
 	fmt.Println("x+1 = ", x1) // 应该输出 "x+1 = 4"
 	fmt.Println("x = ", x)    // 应该输出 "x = 4"

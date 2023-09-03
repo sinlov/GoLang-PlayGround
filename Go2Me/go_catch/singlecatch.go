@@ -2,8 +2,8 @@ package go_catch
 
 import (
 	"fmt"
-	"time"
 	"sync"
+	"time"
 )
 
 // Cache implements a simple in-memory cache used token check
@@ -46,7 +46,7 @@ func (c *Cache) checkExpired() {
 			var cleankeys []string
 			for k, v := range c.mapping {
 				if v != nil {
-					if now - v.created > int64(c.expire) {
+					if now-v.created > int64(c.expire) {
 						cleankeys = append(
 							cleankeys, k)
 					}

@@ -7,5 +7,5 @@ func init() {
 }
 
 func Copy(from string, to string) {
-	fmt.Printf("build copy from %v, to %v\n",from, to)
+	fmt.Printf("build copy from %v, to %v\n", from, to)
 }

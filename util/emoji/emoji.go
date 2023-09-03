@@ -25,12 +25,19 @@ const (
 	surrSelf = 0x10000
 )
 
-//  unicode to emoji
+var (
+	//emojiRegexp    = regexp.MustCompile("\\[[\\\\u0-9a-zA-Z]+]")
+	emojiRegexp = regexp.MustCompile(`\[\\u[0-9a-zA-Z]+]`)
+	//emojiGenRegexp = regexp.MustCompile("\\[\\\\u|]")
+	emojiGenRegexp = regexp.MustCompile(`\[\\u|]`)
+)
+
+// unicode to emoji
 func UnicodeToEmoji(unicode string) string {
 	//emoji
-	re := regexp.MustCompile("\\[[\\\\u0-9a-zA-Z]+\\]")
+	re := emojiRegexp
 	//gen emoji
-	reg := regexp.MustCompile("\\[\\\\u|]")
+	reg := emojiGenRegexp
 	src := re.FindAllString(unicode, -1)
 	for i := 0; i < len(src); i++ {
 		e := reg.ReplaceAllString(src[i], "")
@@ -109,7 +116,7 @@ func ModifiedEmojiToUnicode(emoji []byte) ([]rune, error) {
 
 			index += 2
 
-		case 0b00000000 <= emoji[index] && emoji[index] <= 0b01111111:
+		case emoji[index] <= 0b01111111:
 
 			rr = append(rr, rune(emoji[index]))
 

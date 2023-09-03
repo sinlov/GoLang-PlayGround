@@ -1,11 +1,11 @@
 package go_parse
 
 import (
-	"net/url"
-	"net/http"
-	"log"
-	"io/ioutil"
 	"github.com/sinlov/fastEncryptDecode"
+	"io/ioutil"
+	"log"
+	"net/http"
+	"net/url"
 )
 
 func byte2String(p []byte) string {
@@ -26,7 +26,7 @@ func simple_http_get(urlStr string, params map[string]string) (string, error) {
 		}
 	}
 	u.RawQuery = q.Encode()
-	res, err := http.Get(u.String());
+	res, err := http.Get(u.String())
 	if err != nil {
 		log.Fatal(err)
 		return "", err

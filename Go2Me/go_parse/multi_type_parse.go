@@ -2,7 +2,8 @@ package go_parse
 
 import (
 	"encoding/json"
-	"gopkg.in/yaml.v2"
+
+	"gopkg.in/yaml.v3"
 )
 
 type Graphics struct {
@@ -32,6 +33,6 @@ func multiYamlParse(multi *MultiStruct) (string, error) {
 	return string(marshal), nil
 }
 
-func multiTomlParse(multi *MultiStruct)  {
+func multiTomlParse(multi *MultiStruct) {
 
 }

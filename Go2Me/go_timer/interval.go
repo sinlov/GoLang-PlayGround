@@ -7,8 +7,7 @@ import (
 
 type HandlerFunc func(ctx *context.Context)
 
-//
-//	d more as time.Second * time.Duration(3000)
+// d more as time.Second * time.Duration(3000)
 func SetInterval(d time.Duration, ctx *context.Context, function ...HandlerFunc) {
 	ticker := time.NewTicker(d)
 	go func() {

@@ -1,3 +1,5 @@
+//go:build !test
+
 package go_fatal_error
 
 import "testing"
@@ -7,7 +9,7 @@ func Test_recursiveOverFlows(t *testing.T) {
 		name string
 	}{
 		{
-			name:"recursive",
+			name: "recursive",
 		},
 	}
 	for range tests {

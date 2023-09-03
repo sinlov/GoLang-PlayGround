@@ -1,3 +1,5 @@
+//go:build !test
+
 package go_fatal_error
 
 import (
@@ -5,12 +7,14 @@ import (
 	"time"
 )
 
+//nolint:golint,unused
 func recursiveMethod() {
-	for ; ; {
+	for {
 		recursiveMethod()
 	}
 }
 
+//nolint:golint,unused
 func recursiveOverFlows() {
 	fmt.Printf("start recursive %s\n", time.Now().String())
 	recursiveMethod()

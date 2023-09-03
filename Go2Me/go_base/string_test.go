@@ -21,8 +21,8 @@ var frenchHello string
 // 声明了一个字符串变量，初始化为空字符串
 var emptyString string = ""
 
-//声明一个多行的字符串
-//` 括起的字符串为Raw字符串，即字符串在代码中的形式就是打印时的形式，它没有字符转义，换行也将原样输出
+// 声明一个多行的字符串
+// ` 括起的字符串为Raw字符串，即字符串在代码中的形式就是打印时的形式，它没有字符转义，换行也将原样输出
 var mutli_line_string = `
 	my json
 	new line

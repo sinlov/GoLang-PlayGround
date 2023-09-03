@@ -12,7 +12,6 @@ import "os"
 // 这一过程继续向上，直到发生panic的goroutine中所有调用的函数返回，此时程序退出。
 // 恐慌可以直接调用panic产生。也可以由运行时错误产生，例如访问越界的数组。
 
-
 // -- Recover --
 // 内建的函数，可以让进入令人恐慌的流程中的goroutine恢复过来。
 // recover仅在延迟函数中有效。
@@ -31,7 +30,7 @@ func init() {
 func throwPanic(f func()) (b bool) {
 	defer func() {
 		if x := recover(); x != nil {
-			b = true;
+			b = true
 		}
 	}()
 	f()

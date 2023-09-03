@@ -28,9 +28,9 @@ func Test_routinesSumStartEnd_no_buffer(t *testing.T) {
 		args args
 	}{
 		{
-			name:"no buffer Test",
-			args:args{
-				isBuff:false,
+			name: "no buffer Test",
+			args: args{
+				isBuff: false,
 			},
 		},
 	}
@@ -48,9 +48,9 @@ func Test_routinesSumStartEnd(t *testing.T) {
 		args args
 	}{
 		{
-			name:"buffer test",
-			args:args{
-				isBuff:true,
+			name: "buffer test",
+			args: args{
+				isBuff: true,
 			},
 		},
 	}

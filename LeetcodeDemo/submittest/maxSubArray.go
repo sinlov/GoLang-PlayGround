@@ -1,5 +1,6 @@
 package submittest
 
+//nolint:golint,unused
 func maxSubArray(nums []int) int {
 	var f int
 	var s int
@@ -9,9 +10,9 @@ func maxSubArray(nums []int) int {
 	}
 
 	if numsLen == 1 {
-		return  nums[0]
+		return nums[0]
 	}
-	if numsLen == 2{
+	if numsLen == 2 {
 		if nums[0] > nums[1] {
 			return nums[0]
 		} else {
@@ -25,7 +26,7 @@ func maxSubArray(nums []int) int {
 		f = nums[1]
 		s = nums[0]
 	}
-	for i := 2 ; i < len(nums) -3 ; i++ {
+	for i := 2; i < len(nums)-3; i++ {
 		n := nums[i]
 		if n > s {
 			s = n

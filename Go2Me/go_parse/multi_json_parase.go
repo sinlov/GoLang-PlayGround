@@ -29,7 +29,7 @@ type Body struct {
 }
 
 func Test_mutli_json_double() {
-	js, err := simplejson.NewJson([]byte (json_data))
+	js, err := simplejson.NewJson([]byte(json_data))
 	first, err := json.Marshal(js)
 	if err != nil {
 		fmt.Println("json err:", err)
@@ -54,7 +54,10 @@ func Test_mutli_json_double() {
 
 	js4g, err := json4g.LoadByString(json_data)
 	fmt.Println("LoadByString", js4g.ToString())
-	js4g.GetNodeByPath("status").SetValue(403)
+	err = js4g.GetNodeByPath("status").SetValue(403)
+	if err != nil {
+		return
+	}
 	fmt.Println(js4g.ToString())
 	err = js4g.DelNode("status")
 	if err != nil {

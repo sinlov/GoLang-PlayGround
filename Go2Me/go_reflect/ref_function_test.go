@@ -12,4 +12,3 @@ func TestUseMethodByName(t *testing.T) {
 		UseMethodByName()
 	}
 }
-

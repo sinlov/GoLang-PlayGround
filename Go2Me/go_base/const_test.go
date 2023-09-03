@@ -5,11 +5,11 @@ package go_base
 const value = "value"
 const constantName = value
 
-//如果需要，也可以明确指定常量的类型：
+// 如果需要，也可以明确指定常量的类型：
 const Pi float32 = 3.1415926
 
-//const Pi = 3.1415926
-//const i = 10000
+// const Pi = 3.1415926
+// const i = 10000
 const MaxThread = 10
 const Prefix = "astaxie_"
 

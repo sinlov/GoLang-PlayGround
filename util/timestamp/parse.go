@@ -3,9 +3,11 @@ package timestamp
 import "time"
 
 // time string to timestamp
+//
 //	format -> 2006-01-02 15:04:05.999
 //	locationName -> UTC Asia/Shanghai
 //	timeStr -> for parse time string
+//
 // when error will return 0 and err
 func ParseTimestamp(format, locationName, timeStr string) (int64, error) {
 	location, err := time.LoadLocation(locationName)
@@ -30,6 +32,7 @@ func ParesTimestampMicro(timeStr string) (int64, error) {
 }
 
 // Parse location from location to next
+//
 //	format -> 2006-01-02 15:04:05.999999
 //	timeStr -> for parse time string
 //	fromLocation -> parse from like UTC

@@ -13,6 +13,7 @@ func doBizCount(ch chan int, quit chan bool) {
 }
 
 // most of deadlock use this way to solve
+//
 //	first: use go doBizCount(biz, quit)
 //	second: use select
 //	third: use goto to let main goroutines free
@@ -43,6 +44,7 @@ func doBizCountByClose(biz chan int) {
 }
 
 // Not recommended
+//
 //	will use more goroutine
 func SolveDeadlockByClose(biz chan int, maxCheck int) {
 	var count int

@@ -1,9 +1,9 @@
 .PHONY: test check clean build dist all
 
 install:
-	go get -u github.com/mailru/easyjson/...
-	go get -u github.com/pquerna/ffjson
-	go get -u github.com/ugorji/go/codec/codecgen
+	go install github.com/mailru/easyjson/easyjson@latest
+	go install github.com/pquerna/ffjson@latest
+	go install github.com/ugorji/go/codec/codecgen@latest
 
 jsonGen:
 	easyjson --all ebook.go

@@ -1,8 +1,8 @@
 package go_routine
 
 import (
-	"time"
 	"fmt"
+	"time"
 )
 
 // 默认 5 秒超时

@@ -1,11 +1,11 @@
 package go_routine
 
 import (
-	"time"
 	"crypto/sha1"
-	"io"
 	"fmt"
+	"io"
 	"math/rand"
+	"time"
 )
 
 type TokenHeatBeat struct {
@@ -23,9 +23,12 @@ const DEFAULT_TIME_SEC time.Duration = 1
 var tokenStore TokenHeatBeat
 
 func timeSedHash() string {
-	t := sha1.New();
-	io.WriteString(t, time.Now().String());
-	return fmt.Sprintf("%x", t.Sum(nil));
+	t := sha1.New()
+	_, err := io.WriteString(t, time.Now().String())
+	if err != nil {
+		return ""
+	}
+	return fmt.Sprintf("%x", t.Sum(nil))
 }
 
 // init token info

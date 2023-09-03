@@ -1,9 +1,9 @@
 package go_catch
 
 import (
-	"time"
-	"testing"
 	"fmt"
+	"testing"
+	"time"
 )
 
 func TestSingleCache(t *testing.T) {
@@ -14,15 +14,15 @@ func TestSingleCache(t *testing.T) {
 	v := cache.Get("name")
 	if v != "myTest" {
 		t.Fatal("cache get and set error")
-	} else{
-		fmt.Printf("get catch %s\n",v)
+	} else {
+		fmt.Printf("get catch %s\n", v)
 	}
 	time.Sleep(3 * time.Second)
 	v = cache.Get("name")
 	if v != "" {
-		t.Fatal("cache set expire error")
+		t.Fatalf("cache set expire error %v", v)
 	} else {
-		fmt.Errorf("error cache %s\n", v)
+		t.Logf("error cache empty")
 	}
 
 }

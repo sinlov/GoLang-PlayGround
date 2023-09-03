@@ -12,7 +12,7 @@ func Test_getObjHashCode(t *testing.T) {
 		want    int
 		wantErr bool
 	}{
-	// TODO: Add test cases.
+		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
 		got, err := getObjHashCode(tt.args.obj)

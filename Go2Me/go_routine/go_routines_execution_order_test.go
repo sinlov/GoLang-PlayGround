@@ -10,7 +10,7 @@ func TestRoutinesOrderWithChan(t *testing.T) {
 		t.Log("done goroutine")
 	}()
 	t.Log("before goroutine")
-	<- ch
+	<-ch
 	//close(ch)
 	t.Log("function done")
 }

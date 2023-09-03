@@ -1,11 +1,11 @@
 package go_http
 
 import (
-	"net/url"
-	"net/http/httputil"
-	"net/http"
-	"log"
 	"flag"
+	"log"
+	"net/http"
+	"net/http/httputil"
+	"net/url"
 )
 
 type handle struct {

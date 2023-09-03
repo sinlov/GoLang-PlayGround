@@ -11,15 +11,15 @@ func add(x, y int) {
 }
 
 func MultiAdd(start, count int) {
-	fmt.Printf("start at number %v, end count %v\n",start, count)
+	fmt.Printf("start at number %v, end count %v\n", start, count)
 	start_time := time.Now()
 	ch := make(chan int, count)
-	for i := start; i < start + count; i++ {
+	for i := start; i < start+count; i++ {
 		go add(i, i)
 		select {
 		case ch <- i:
 		default:
-			fmt.Printf("channl full at numer %v \n",i)
+			fmt.Printf("channl full at numer %v \n", i)
 		}
 	}
 	<-ch

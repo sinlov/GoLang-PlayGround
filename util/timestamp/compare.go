@@ -101,5 +101,8 @@ func CompareLocationEQ(timestampFrom, timestampTo string, layout string, locatio
 		return false, err
 	}
 	to, err := time.ParseInLocation(layout, timestampTo, loc)
+	if err != nil {
+		return false, err
+	}
 	return from.Equal(to), nil
 }

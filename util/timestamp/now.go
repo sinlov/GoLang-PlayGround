@@ -18,6 +18,7 @@ func UTCTimeMicro() string {
 }
 
 // get location time format as 2006-01-02 15:04:05
+//
 //	locationName UTC Asia/Shanghai of others, warning if LoadLocation not support will return ""
 func LocationSecond(locationName string) string {
 	loc, err := time.LoadLocation(locationName)
@@ -28,6 +29,7 @@ func LocationSecond(locationName string) string {
 }
 
 // get location time format as 2006-01-02 15:04:05.999999
+//
 //	locationName UTC Asia/Shanghai of others, warning if LoadLocation not support will return ""
 func LocationMicro(locationName string) string {
 	loc, err := time.LoadLocation(locationName)

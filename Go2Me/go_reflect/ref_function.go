@@ -1,19 +1,19 @@
 package go_reflect
 
 import (
+	"encoding/xml"
 	"fmt"
 	"reflect"
-	"encoding/xml"
 )
 
 type st struct {
 }
 
-func (this *st)Echo() {
+func (this *st) Echo() {
 	fmt.Println("echo()")
 }
 
-func (this *st)Echo2() {
+func (this *st) Echo2() {
 	fmt.Println("echo--------------------()")
 }
 
@@ -28,7 +28,10 @@ type st2 struct {
 
 func UseMethodByName() {
 	s2 := st2{}
-	xml.Unmarshal([]byte(xmlstr), &s2)
+	err := xml.Unmarshal([]byte(xmlstr), &s2)
+	if err != nil {
+		return
+	}
 
 	s := &st{}
 	v := reflect.ValueOf(s)

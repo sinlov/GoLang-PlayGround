@@ -175,6 +175,9 @@ func ReadFileAsByte(path string) ([]byte, error) {
 // ReadFileAsJson read file as json
 func ReadFileAsJson(path string, v interface{}) error {
 	fileAsByte, err := ReadFileAsByte(path)
+	if err != nil {
+		return fmt.Errorf("path: %s , read file as byte err: %v", path, err)
+	}
 	err = json.Unmarshal(fileAsByte, v)
 	if err != nil {
 		return fmt.Errorf("path: %s , read file as json err: %v", path, err)

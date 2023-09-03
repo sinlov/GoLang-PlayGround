@@ -11,7 +11,7 @@ func Test_sum(t *testing.T) {
 		name string
 		args args
 	}{
-	// TODO: Add test cases.
+		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
 		sum(tt.args.a, tt.args.c)
@@ -23,7 +23,7 @@ func Test_go_sum(t *testing.T) {
 		name string
 	}{
 		{
-			name:"Base",
+			name: "Base",
 		},
 	}
 	for range tests {

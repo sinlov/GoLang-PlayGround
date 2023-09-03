@@ -1,10 +1,16 @@
+### custom ignore
+
+*.log
+logs/
+
 ### build temple
 build/
 dist/
 
 ### go mod
 
-go.sum
+!go.sum
+vendor/
 
 ### go test
 

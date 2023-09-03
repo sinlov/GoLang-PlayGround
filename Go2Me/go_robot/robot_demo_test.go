@@ -1,3 +1,5 @@
+//go:build !test
+
 package go_robot
 
 import "testing"
@@ -7,7 +9,7 @@ func TestOSX_Open_Chrome_To_GitHub(t *testing.T) {
 		name string
 	}{
 		{
-			name:"base",
+			name: "base",
 		},
 	}
 	for range tests {

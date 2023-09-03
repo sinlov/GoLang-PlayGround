@@ -29,6 +29,7 @@ func NewOption(opts ...OptionFunc) (opt *Option) {
 	return
 }
 
+//nolint:golint,unused
 func newOptionABS(a, b string, c int) *Option {
 	return &Option{
 		A: a,

@@ -16,13 +16,18 @@ func main() {
 	rand.Seed(time.Now().UTC().UnixNano())
 	http.HandleFunc("/", HelloHandler)
 	http.HandleFunc("/debug/vars_base", httpdebug.DebugHandler)
-	http.ListenAndServe(":8000", nil)
+	err := http.ListenAndServe(":8000", nil)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 }
 
 func HelloHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello World")
 }
 
+//nolint:golint,unused
 func a() {
 	for i := 0; i < 10000; i++ {
 		fmt.Print(".")

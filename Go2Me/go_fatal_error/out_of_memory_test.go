@@ -1,3 +1,5 @@
+//go:build !test
+
 package go_fatal_error
 
 import "testing"
@@ -7,7 +9,7 @@ func Test_listOutOfMem(t *testing.T) {
 		name string
 	}{
 		{
-			name:"OOM test",
+			name: "OOM test",
 		},
 	}
 	for range tests {

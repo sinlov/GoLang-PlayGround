@@ -12,17 +12,17 @@ func TestMutilAdd(t *testing.T) {
 		args args
 	}{
 		{
-			name:"base test 0 - 10",
-			args:args{
-				start:0,
-				count:10,
+			name: "base test 0 - 10",
+			args: args{
+				start: 0,
+				count: 10,
 			},
 		},
 		{
-			name:"base test 0 - 100",
-			args:args{
-				start:0,
-				count:100,
+			name: "base test 0 - 100",
+			args: args{
+				start: 0,
+				count: 100,
 			},
 		},
 	}

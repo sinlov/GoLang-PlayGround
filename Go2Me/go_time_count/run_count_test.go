@@ -15,22 +15,22 @@ func TestStringsJoinSliceStringTime(t *testing.T) {
 		want interface{}
 	}{
 		{
-			name:"base",
-			args:args{
+			name: "base",
+			args: args{
 				[]string{"1", "2", "3", "4"},
 			},
 			want: string("size 4 string"),
 		},
 		{
-			name:"more",
-			args:args{
+			name: "more",
+			args: args{
 				[]string{"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"},
 			},
 			want: string("size 10 string"),
 		},
 		{
-			name:"more",
-			args:args{
+			name: "more",
+			args: args{
 				[]string{
 					"1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
 					"1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
@@ -41,11 +41,10 @@ func TestStringsJoinSliceStringTime(t *testing.T) {
 				},
 			},
 			want: string("size 50 string"),
-
 		},
 		{
-			name:"more",
-			args:args{
+			name: "more",
+			args: args{
 				[]string{
 					"1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
 					"1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
@@ -82,4 +81,3 @@ func TestStringsJoinSliceStringTime(t *testing.T) {
 		}
 	}
 }
-

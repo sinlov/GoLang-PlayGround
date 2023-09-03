@@ -26,7 +26,7 @@ func routinesSumStartEnd(isBuff bool) {
 	}
 
 	for i := 0; i < 10; i++ {
-		go sumStartEnd(i, i + 10, ch)
+		go sumStartEnd(i, i+10, ch)
 	}
 
 	for i := 0; i < 10; i++ {
