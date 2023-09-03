@@ -7,9 +7,11 @@
 [![GoReportCard](https://goreportcard.com/badge/github.com/sinlov/GoLang-PlayGround)](https://goreportcard.com/report/github.com/sinlov/GoLang-PlayGround)
 [![codecov](https://codecov.io/gh/sinlov/GoLang-PlayGround/branch/main/graph/badge.svg)](https://codecov.io/gh/sinlov/GoLang-PlayGround)
 
-[TOC]
 
 # this is my GoLang PlayGround
+
+- minimum go version: go 1.19
+- change `go 1.19`, `^1.19`, `1.19.12-bullseye` `1.19.12` to new go version
 
 # Go2Me
 
