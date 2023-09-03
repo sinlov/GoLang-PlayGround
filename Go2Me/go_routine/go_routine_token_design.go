@@ -1,3 +1,5 @@
+//go:build !test
+
 package go_routine
 
 import (
