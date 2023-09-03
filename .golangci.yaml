@@ -29,7 +29,7 @@ run:
     - Go2Me/go_robot
     - Go2Me/go_regexp
     - Go2Me/go_parse
-    - Go2Me/go_sys
+    - Go2Me/go_sys/*
     - Go2Me/go_fatal_error
     - Go2Me/go_timer
     - Go2Me/go_reflect
