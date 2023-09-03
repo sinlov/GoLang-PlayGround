@@ -10,7 +10,7 @@ require (
 	github.com/bwmarrin/snowflake v0.3.0
 	github.com/chilts/sid v0.0.0-20190607042430-660e94789ec9
 	github.com/donnie4w/json4g v0.0.0-20160510154529-55f68986f34c
-	github.com/go-vgo/robotgo v0.100.10
+	github.com/go-vgo/robotgo v1.0.0-rc2
 	github.com/google/uuid v1.3.1
 	github.com/ideazxy/iso8583 v0.0.0-20160317060925-d06dcb8f1fc4
 	github.com/ipfs/go-cid v0.4.1
@@ -35,16 +35,19 @@ require (
 )
 
 require (
-	github.com/StackExchange/wmi v1.2.1 // indirect
 	github.com/antlabs/stl v0.0.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/felixge/fgprof v0.9.3 // indirect
+	github.com/gen2brain/shm v0.0.0-20221026125803-c33c9e32b1c8 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/google/pprof v0.0.0-20211214055906-6f57359322fd // indirect
 	github.com/gopherjs/gopherjs v1.17.2 // indirect
+	github.com/jezek/xgb v1.1.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/jtolds/gls v4.20.0+incompatible // indirect
+	github.com/kbinani/screenshot v0.0.0-20210720154843-7d3a670d8329 // indirect
 	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
+	github.com/lufia/plan9stats v0.0.0-20230110061619-bbe2e5e100de // indirect
 	github.com/lxn/win v0.0.0-20210218163916-a377121e959e // indirect
 	github.com/minio/sha256-simd v1.0.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421 // indirect
@@ -56,20 +59,21 @@ require (
 	github.com/multiformats/go-varint v0.0.6 // indirect
 	github.com/otiai10/gosseract v2.2.1+incompatible // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/robotn/gohook v0.31.3 // indirect
+	github.com/power-devops/perfstat v0.0.0-20221212215047-62379fc7944b // indirect
 	github.com/robotn/xgb v0.0.0-20190912153532-2cb92d044934 // indirect
 	github.com/robotn/xgbutil v0.0.0-20190912154524-c861d6f87770 // indirect
-	github.com/shirou/gopsutil v3.21.10+incompatible // indirect
+	github.com/shirou/gopsutil/v3 v3.23.1 // indirect
 	github.com/smarty/assertions v1.15.0 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
-	github.com/tklauser/go-sysconf v0.3.9 // indirect
-	github.com/tklauser/numcpus v0.3.0 // indirect
-	github.com/vcaesar/gops v0.21.3 // indirect
-	github.com/vcaesar/imgo v0.30.0 // indirect
+	github.com/tklauser/go-sysconf v0.3.11 // indirect
+	github.com/tklauser/numcpus v0.6.0 // indirect
+	github.com/vcaesar/gops v0.30.1 // indirect
+	github.com/vcaesar/imgo v0.30.2 // indirect
 	github.com/vcaesar/keycode v0.10.0 // indirect
 	github.com/vcaesar/tt v0.20.0 // indirect
+	github.com/yusufpapurcu/wmi v1.2.2 // indirect
 	golang.org/x/crypto v0.1.0 // indirect
-	golang.org/x/image v0.0.0-20211028202545-6944b10bf410 // indirect
+	golang.org/x/image v0.5.0 // indirect
 	golang.org/x/sys v0.6.0 // indirect
 	lukechampine.com/blake3 v1.1.6 // indirect
 )

@@ -10,7 +10,7 @@ import (
 
 func eachSecKeyBroadInput(word string) {
 	robotgo.Sleep(1)
-	robotgo.TypeString(word)
+	robotgo.TypeStr(word)
 	robotgo.Sleep(1)
 }
 
@@ -67,11 +67,9 @@ func OSX_Open_Chrome_To_GitHub() {
 	// }
 	count := 10
 	for i := 0; i < count; i++ {
-		mLeft := robotgo.AddEvent("mLeft")
-		if mLeft {
-			x, y := robotgo.GetMousePos()
-			fmt.Printf("you press %v => x,y [%d, %d]\n", "mouse left button", x, y)
-		}
+		robotgo.Click("left", true)
+		x, y := robotgo.Location()
+		fmt.Printf("you press %v => x,y [%d, %d]\n", "mouse left button", x, y)
 	}
 
 	// fpid, err := robotgo.FindIds("Electron")
