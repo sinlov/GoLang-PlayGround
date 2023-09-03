@@ -1,4 +1,5 @@
-//go:build !test
+//go:build !test && !windows
+// +build !test,!windows
 
 package go_sys
 
