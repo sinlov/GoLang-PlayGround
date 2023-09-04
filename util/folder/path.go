@@ -8,7 +8,6 @@ import (
 	"io/fs"
 	"os"
 	"os/exec"
-	"path"
 	"path/filepath"
 	"runtime"
 )
@@ -99,9 +98,9 @@ func PathIsFile(path string) bool {
 	return !fi.IsDir()
 }
 
-// PathJoin is path.Join()
+// PathJoin is filepath.Join()
 func PathJoin(elem ...string) string {
-	return path.Join(elem...)
+	return filepath.Join(elem...)
 }
 
 // PathParent as filepath.Dir
