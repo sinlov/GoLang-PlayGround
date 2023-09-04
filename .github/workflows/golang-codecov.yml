@@ -1,13 +1,7 @@
 name: golang-codecov
 
 on:
-  push:
-    paths-ignore:
-      - '**/README.md'
-    branches:
-      - 'main'
-    tags:
-      - '*' # Push events to matching *, i.e. 1.0.0 v1.0, v20.15.10
+  workflow_call: # https://docs.github.com/actions/using-workflows/reusing-workflows#using-inputs-and-secrets-in-a-reusable-workflow
 
 permissions:
   contents: write
@@ -31,6 +25,9 @@ jobs:
         run: |
           go env
           go version
+
+      - name: Run go install check
+        run: go get -t -v ./...
 
       - name: Run go build
         run: go build -v -tags test ./...

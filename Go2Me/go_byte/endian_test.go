@@ -1,30 +1,17 @@
 package go_byte
 
 import (
-	"github.com/smartystreets/goconvey/convey"
 	"testing"
 )
 
 func TestIsBigEndian(t *testing.T) {
-	convey.Convey("TestIsBigEndian", t, func() {
-		// mock
-		bigEndian := IsBigEndian()
-		t.Logf("is bigEndian: %v", bigEndian)
-		// do
-		// verify
-		convey.So("", convey.ShouldEqual, "")
-	})
+	bigEndian := IsBigEndian()
+	t.Logf("is bigEndian: %v", bigEndian)
 }
 
 func TestIsLittleEndian(t *testing.T) {
-	convey.Convey("TestIsLittleEndian", t, func() {
-		// mock
-		littleEndian := IsLittleEndian()
-		t.Logf("is littleEndian: %v", littleEndian)
-		// do
-		// verify
-		convey.So("", convey.ShouldEqual, "")
-	})
+	littleEndian := IsLittleEndian()
+	t.Logf("is littleEndian: %v", littleEndian)
 }
 
 func BenchmarkIsBigEndian(b *testing.B) {

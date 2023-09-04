@@ -26,7 +26,6 @@ require (
 	github.com/satori/go.uuid v1.2.0
 	github.com/segmentio/ksuid v1.0.4
 	github.com/sinlov/fastEncryptDecode v0.0.0-20201225084021-254d1ebf8a98
-	github.com/smartystreets/goconvey v1.8.1
 	github.com/sony/sonyflake v1.2.0
 	github.com/stretchr/testify v1.8.4
 	github.com/ugorji/go/codec v1.2.11
@@ -41,10 +40,8 @@ require (
 	github.com/gen2brain/shm v0.0.0-20221026125803-c33c9e32b1c8 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/google/pprof v0.0.0-20211214055906-6f57359322fd // indirect
-	github.com/gopherjs/gopherjs v1.17.2 // indirect
 	github.com/jezek/xgb v1.1.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
-	github.com/jtolds/gls v4.20.0+incompatible // indirect
 	github.com/kbinani/screenshot v0.0.0-20210720154843-7d3a670d8329 // indirect
 	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
 	github.com/lufia/plan9stats v0.0.0-20230110061619-bbe2e5e100de // indirect
@@ -63,7 +60,6 @@ require (
 	github.com/robotn/xgb v0.0.0-20190912153532-2cb92d044934 // indirect
 	github.com/robotn/xgbutil v0.0.0-20190912154524-c861d6f87770 // indirect
 	github.com/shirou/gopsutil/v3 v3.23.1 // indirect
-	github.com/smarty/assertions v1.15.0 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	github.com/tklauser/go-sysconf v0.3.11 // indirect
 	github.com/tklauser/numcpus v0.6.0 // indirect

@@ -2,7 +2,7 @@ package go_regexp
 
 import (
 	"fmt"
-	"github.com/smartystreets/goconvey/convey"
+	"github.com/stretchr/testify/assert"
 	"regexp"
 	"testing"
 )
@@ -52,24 +52,20 @@ func Test_password(t *testing.T) {
 	}
 }
 
-func TestNoAscii(t *testing.T) {
-	convey.Convey("mock TestNoAscii", t, func() {
-		// mock
-		text := "我的daw123zxc21你的"
-		convey.Convey("do TestNoAscii", func() {
-			// do
-			asscii, err := regexp.Compile("[[:^ascii:]]+")
-			if err != nil {
-				t.Fatalf("regexp error %v", err)
-			}
-			convey.Convey("verify TestNoAscii", func() {
-				// verify
-				res := asscii.ReplaceAllString(text, "")
-				fmt.Printf("res -> %v\n", res)
-				convey.So(res, convey.ShouldNotEqual, "")
-			})
-		})
-	})
+func TestTestNoAscii(t *testing.T) {
+	t.Logf("~> mock TestNoAscii")
+	// mock TestNoAscii
+	text := "我的daw123zxc21你的"
+	t.Logf("~> do TestNoAscii")
+	// do TestNoAscii
+	asscii, err := regexp.Compile("[[:^ascii:]]+")
+	if err != nil {
+		t.Fatalf("regexp error %v", err)
+	}
+	res := asscii.ReplaceAllString(text, "")
+
+	// verify TestNoAscii
+	assert.Equal(t, "daw123zxc21", res)
 }
 
 func Test_email(t *testing.T) {

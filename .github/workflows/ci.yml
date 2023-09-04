@@ -66,6 +66,15 @@ jobs:
 #      verison_name: ${{ needs.version.outputs.tag_name }}
 #      upload_artifact_name: go-release
 
+  golang-codecov:
+    name: go-codecov
+    needs:
+     - version
+     - golang-ci
+    if: ${{ ( github.event_name == 'push' && github.ref == 'refs/heads/main' ) || github.base_ref == 'main' }}
+    uses: ./.github/workflows/golang-codecov.yml
+    secrets: inherit
+
 #  deploy-tag:
 #    needs:
 #      - version
