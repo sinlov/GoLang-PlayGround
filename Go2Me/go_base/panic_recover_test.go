@@ -1,6 +1,9 @@
 package go_base
 
-import "os"
+import (
+	"fmt"
+	"os"
+)
 
 // 类似java的异常机制,但不建议使用这个
 // 把它作为最后的手段来使用，也就是说，你的代码中应当没有，或者很少有panic的东西
@@ -22,7 +25,7 @@ var user = os.Getenv("USER")
 
 func init() {
 	if user == "" {
-		panic("has value of $USER at")
+		fmt.Print("not find has value of $USER")
 	}
 }
 

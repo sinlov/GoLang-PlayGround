@@ -3,6 +3,7 @@ package folder_test
 import (
 	"github.com/sinlov/GoLang-PlayGround/util/folder"
 	"github.com/stretchr/testify/assert"
+	"runtime"
 	"testing"
 )
 
@@ -89,10 +90,16 @@ func TestPathParent(t *testing.T) {
 	// do PathParent
 	t.Logf("~> do PathParent")
 	// verify PathParent
-	assert.Equal(t, "foo/bar", folder.PathParent(pathOne))
 
-	assert.Equal(t, "/abc/def", folder.PathParent("/abc/def/ghf"))
-	assert.Equal(t, "../abc/def", folder.PathParent("../abc/def/ghf"))
+	if runtime.GOOS == "windows" {
+		assert.Equal(t, `foo\bar`, folder.PathParent(pathOne))
+		assert.Equal(t, `\abc\def`, folder.PathParent("/abc/def/ghf"))
+		assert.Equal(t, `..\abc\def`, folder.PathParent("../abc/def/ghf"))
+	} else {
+		assert.Equal(t, "foo/bar", folder.PathParent(pathOne))
+		assert.Equal(t, "/abc/def", folder.PathParent("/abc/def/ghf"))
+		assert.Equal(t, "../abc/def", folder.PathParent("../abc/def/ghf"))
+	}
 }
 
 func TestFolder(t *testing.T) {
