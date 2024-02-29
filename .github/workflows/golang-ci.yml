@@ -38,7 +38,7 @@ jobs:
         run: go build -v -tags test ./...
 
       - name: Run golangci-lint
-        uses: golangci/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@v4
         with:
           # Require: The version of golangci-lint to use.
           # When `install-mode` is `binary` (default) the value can be v1.2 or v1.2.3 or `latest` to use the latest version.
@@ -47,7 +47,7 @@ jobs:
           # version: v1.45.2 for go verison 1.18+
           # version: v1.42.1 for go verison 1.17+
           # version: v1.41.0 for go verison 1.16+
-          version: v1.53.2
+          version: latest
 
           # Optional: working directory, useful for monorepos
           # working-directory: somedir
