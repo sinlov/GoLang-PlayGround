@@ -23,7 +23,7 @@ func TestLastIndex(t *testing.T) {
 				target: "go gopher",
 				sub:    "go",
 			},
-			wantRes: 0,
+			wantRes: 3,
 		},
 	}
 	for _, tc := range tests {
