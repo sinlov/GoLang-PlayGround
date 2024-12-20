@@ -1,6 +1,6 @@
 module github.com/sinlov/GoLang-PlayGround
 
-go 1.19
+go 1.20
 
 require (
 	github.com/alecthomas/log4go v0.0.0-20180109082532-d146e6b86faa
@@ -68,8 +68,8 @@ require (
 	github.com/vcaesar/keycode v0.10.0 // indirect
 	github.com/vcaesar/tt v0.20.0 // indirect
 	github.com/yusufpapurcu/wmi v1.2.2 // indirect
-	golang.org/x/crypto v0.1.0 // indirect
-	golang.org/x/image v0.5.0 // indirect
-	golang.org/x/sys v0.6.0 // indirect
+	golang.org/x/crypto v0.31.0 // indirect
+	golang.org/x/image v0.18.0 // indirect
+	golang.org/x/sys v0.28.0 // indirect
 	lukechampine.com/blake3 v1.1.6 // indirect
 )

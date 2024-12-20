@@ -10,8 +10,8 @@
 
 # this is my GoLang PlayGround
 
-- minimum go version: go 1.19
-- change `go 1.19`, `^1.19`, `1.19.12-bullseye` `1.19.12` to new go version
+- minimum go version: go 1.20
+- change `go 1.20`, `^1.20`, `1.20.14` `1.20.14` to new go version
 
 # Go2Me
 

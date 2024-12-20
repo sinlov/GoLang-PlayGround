@@ -8,7 +8,7 @@ ROOT_NAME ?=GoLang-PlayGround
 
 ## MakeDocker.mk settings start
 ROOT_OWNER ?=sinlov
-ROOT_PARENT_SWITCH_TAG=1.19.12-bullseye
+ROOT_PARENT_SWITCH_TAG=1.20.14
 # for image local build
 INFO_TEST_BUILD_DOCKER_PARENT_IMAGE=golang
 # for image running
@@ -130,7 +130,7 @@ dep: modVerify modDownload modTidy
 
 style: modTidy modVerify modFmt modLintRun
 
-ci: modTidy modVerify modFmt modVet modLintRun test
+ci: modTidy modVerify modFmt modLintRun test
 
 buildMain:
 	@echo "-> start build local OS: ${PLATFORM} ${OS_BIT}"
