@@ -39,6 +39,7 @@ ENV_INFO_TEST_TAG_BUILD_DOCKER_CONTAINER_NAME=test-${ENV_INFO_DOCKER_REPOSITORY}
 #	@echo "=> now run as docker with darwin"
 #	@echo "local ip address is: $(ROOT_LOCAL_IP_V4_DARWIN)"
 
+.PHONY: dockerEnv
 dockerEnv:
 	@echo "== docker env print start"
 	@echo "ENV_INFO_DOCKER_REPOSITORY                     ${ENV_INFO_DOCKER_REPOSITORY}"
@@ -58,17 +59,21 @@ dockerEnv:
 	@echo ""
 	@echo "== docker env print end"
 
+.PHONY: dockerAllPull
 dockerAllPull:
 	docker pull ${ENV_INFO_BUILD_DOCKER_FROM_IMAGE}
 	docker pull ${ENV_INFO_TEST_BUILD_DOCKER_PARENT_IMAGE}
 
+.PHONY: dockerAllPull
 dockerCleanImages:
 	(while :; do echo 'y'; sleep 3; done) | docker image prune
 
+.PHONY: dockerCleanPruneAll
 dockerCleanPruneAll:
 	(while :; do echo 'y'; sleep 3; done) | docker container prune
 	(while :; do echo 'y'; sleep 3; done) | docker image prune
 
+.PHONY: dockerRunContainerParentBuild
 dockerRunContainerParentBuild:
 	@echo "run rm container image: ${ENV_INFO_TEST_BUILD_DOCKER_PARENT_IMAGE}"
 	$(info docker run -d --rm --name ${ENV_INFO_TEST_BUILD_DOCKER_PARENT_CONTAINER} ${ENV_INFO_TEST_BUILD_DOCKER_PARENT_IMAGE})
@@ -77,15 +82,19 @@ dockerRunContainerParentBuild:
 	@echo "-> run rm container name: ${ENV_INFO_TEST_BUILD_DOCKER_PARENT_CONTAINER}"
 	@echo "-> into container use: docker exec -it ${ENV_INFO_TEST_BUILD_DOCKER_PARENT_CONTAINER} bash"
 
+.PHONY: dockerRmContainerParentBuild
 dockerRmContainerParentBuild:
 	-docker rm -f ${ENV_INFO_TEST_BUILD_DOCKER_PARENT_CONTAINER}
 
+.PHONY: dockerPruneContainerParentBuild
 dockerPruneContainerParentBuild: dockerRmContainerParentBuild
 	-docker rmi -f ${ENV_INFO_TEST_BUILD_DOCKER_PARENT_IMAGE}
 
+.PHONY: dockerTestBuildLatest
 dockerTestBuildLatest:
 	docker build --rm=true --tag ${ENV_INFO_BUILD_DOCKER_SOURCE_IMAGE}:${ENV_INFO_BUILD_DOCKER_TAG} --file ${ENV_INFO_TEST_BUILD_DOCKER_FILE} .
 
+.PHONY: dockerTestBuildLatest
 dockerTestRunLatest:
 	docker image inspect --format='{{ .Created}}' ${ENV_INFO_BUILD_DOCKER_SOURCE_IMAGE}:${ENV_INFO_BUILD_DOCKER_TAG}
 	$(warning you can change test docker run args at here for dev)
@@ -96,41 +105,53 @@ dockerTestRunLatest:
 	$(info docker run -it -d --entrypoint /bin/sh --name ${ENV_INFO_TEST_TAG_BUILD_DOCKER_CONTAINER_NAME} ${ENV_INFO_BUILD_DOCKER_SOURCE_IMAGE}:${ENV_INFO_BUILD_DOCKER_TAG})
 	-docker inspect --format='{{ .State.Status}}' ${ENV_INFO_TEST_TAG_BUILD_DOCKER_CONTAINER_NAME}
 
+.PHONY: dockerTestLogLatest
 dockerTestLogLatest:
 	-docker logs ${ENV_INFO_TEST_TAG_BUILD_DOCKER_CONTAINER_NAME}
 
+.PHONY: dockerTestRmLatest
 dockerTestRmLatest:
 	-docker rm -f ${ENV_INFO_TEST_TAG_BUILD_DOCKER_CONTAINER_NAME}
 
+.PHONY: dockerTestRmiLatest
 dockerTestRmiLatest:
 	-docker rmi -f ${ENV_INFO_BUILD_DOCKER_SOURCE_IMAGE}:${ENV_INFO_BUILD_DOCKER_TAG}
 
+.PHONY: dockerTestRestartLatest
 dockerTestRestartLatest: dockerTestRmLatest dockerTestRmiLatest dockerTestBuildLatest dockerTestRunLatest
 	@echo "restart ${ENV_INFO_TEST_TAG_BUILD_DOCKER_CONTAINER_NAME} ${ENV_INFO_BUILD_DOCKER_SOURCE_IMAGE}:${ENV_INFO_BUILD_DOCKER_TAG}"
 
+.PHONY: dockerTestStopLatest
 dockerTestStopLatest: dockerTestRmLatest dockerTestRmiLatest
 	@echo "stop and remove ${ENV_INFO_TEST_TAG_BUILD_DOCKER_CONTAINER_NAME} ${ENV_INFO_BUILD_DOCKER_SOURCE_IMAGE}:${ENV_INFO_BUILD_DOCKER_TAG}"
 
+.PHONY: dockerTestPruneLatest
 dockerTestPruneLatest: dockerTestStopLatest
 	@echo "prune and remove ${ENV_INFO_BUILD_DOCKER_SOURCE_IMAGE}:${ENV_INFO_BUILD_DOCKER_TAG}"
 
+.PHONY: dockerRmiBuild
 dockerRmiBuild:
 	-docker rmi -f ${ENV_INFO_BUILD_DOCKER_SOURCE_IMAGE}:${ENV_INFO_BUILD_DOCKER_TAG}
 	-docker rmi -f ${ENV_INFO_PRIVATE_DOCKER_REGISTRY}${ENV_INFO_BUILD_DOCKER_SOURCE_IMAGE}:${ENV_INFO_BUILD_DOCKER_TAG}
 
+.PHONY: dockerBuild
 dockerBuild:
 	docker build --rm=true --tag ${ENV_INFO_BUILD_DOCKER_SOURCE_IMAGE}:${ENV_INFO_BUILD_DOCKER_TAG} --file ${ENV_INFO_BUILD_DOCKER_FILE} .
 
+.PHONY: dockerTag
 dockerTag:
 	docker tag ${ENV_INFO_BUILD_DOCKER_SOURCE_IMAGE}:${ENV_INFO_BUILD_DOCKER_TAG} ${ENV_INFO_PRIVATE_DOCKER_REGISTRY}${ENV_INFO_BUILD_DOCKER_SOURCE_IMAGE}
 
+.PHONY: dockerBeforePush
 dockerBeforePush: dockerRmiBuild dockerBuild dockerTag
 	@echo "===== then now can push to ${ENV_INFO_PRIVATE_DOCKER_REGISTRY}"
 
+.PHONY: dockerPushBuild
 dockerPushBuild: dockerBeforePush
 	docker push ${ENV_INFO_PRIVATE_DOCKER_REGISTRY}${ENV_INFO_BUILD_DOCKER_SOURCE_IMAGE}:${ENV_INFO_BUILD_DOCKER_TAG}
 	@echo "=> push ${ENV_INFO_PRIVATE_DOCKER_REGISTRY}${ENV_INFO_BUILD_DOCKER_SOURCE_IMAGE}:${ENV_INFO_BUILD_DOCKER_TAG}"
 
+.PHONY: helpDocker
 helpDocker:
 	@echo "=== this make file can include MakeDocker.mk then use"
 	@echo "- must has file: [ ${ENV_INFO_BUILD_DOCKER_FILE} ${ENV_INFO_TEST_BUILD_DOCKER_FILE}" ]

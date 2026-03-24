@@ -1,0 +1,187 @@
+name: goreleaser-golang
+
+on:
+  workflow_call: # https://docs.github.com/actions/using-workflows/reusing-workflows#using-inputs-and-secrets-in-a-reusable-workflow
+    inputs:
+      version_name:
+        description: 'most of this use tag name'
+        default: ''
+        required: true
+        type: string
+      dry_run:
+        description: 'dry run flag'
+        default: false
+        required: false
+        type: boolean
+      upload_artifact_name:
+        description: 'upload artifact name'
+        default: ''
+        required: false
+        type: string
+      go_build_id:
+        description: 'setup go build id'
+        default: 'unknown'
+        required: false
+        type: string
+      goreleaser-build-timeout-minutes:
+        description: 'goreleaser build timeout minutes default 30'
+        default: 30
+        required: false
+        type: number
+
+permissions: # https://docs.github.com/actions/using-workflows/workflow-syntax-for-github-actions#permissions
+  contents: write
+
+jobs:
+  goreleaser-golang:
+    defaults:
+      run:
+        shell: bash
+       # working-directory: ${{ env.WORK_DIR }}
+    strategy:
+      matrix:
+        # You can add more, for any target you'd like! target list see: go tool dist list
+        include:
+          - build: linux-amd64
+            os: ubuntu-latest
+            go_os: linux
+            go_arch: amd64
+          # - build: linux-arm64
+          #   os: ubuntu-latest
+          #   go_os: linux
+          #   go_arch: arm64
+          # - build: macos-amd64
+          #   os: macos-latest
+          #   go_os: darwin
+          #   go_arch: amd64
+          # - build: macos-arm64
+          #   os: macos-latest
+          #   go_os: darwin
+          #   go_arch: arm64
+          # - build: windows-amd64
+          #   os: windows-latest
+          #   go_os: windows
+          #   go_arch: amd64
+          # - build: windows-arm64
+          #   os: windows-latest
+          #   go_os: windows
+          #   go_arch: arm64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Check inputs
+        run: |
+          echo "github.run_id: ${{ github.run_id }}"
+          echo "github.run_attempt: ${{ github.run_attempt }}"
+          echo "inputs.version_name: ${{ inputs.version_name }}"
+          echo "inputs.dry_run: ${{ inputs.dry_run }}"
+          echo "inputs.upload_artifact_name: ${{ inputs.upload_artifact_name }}"
+          echo "inputs.go_build_id: ${{ inputs.go_build_id }}"
+          echo "inputs.goreleaser-build-timeout-minutes: ${{ inputs.goreleaser-build-timeout-minutes }}"
+
+      - uses: actions/checkout@v6
+      - name: Set up Go SDK
+        uses: actions/setup-go@v6
+        with:
+          go-version: '1.23.8'
+          cache: false
+
+      -
+        name: version GoReleaser
+        uses: goreleaser/goreleaser-action@v6
+        with:
+          # either 'goreleaser' (default) or 'goreleaser-pro'
+          distribution: goreleaser
+          # 'latest', 'nightly', or a semver
+          version: '~> v2'
+          args: --version
+
+      -
+        name: healthcheck GoReleaser
+        uses: goreleaser/goreleaser-action@v6
+        with:
+          # either 'goreleaser' (default) or 'goreleaser-pro'
+          distribution: goreleaser
+          # 'latest', 'nightly', or a semver
+          version: '~> v2'
+          args: healthcheck
+
+      -
+        name: check GoReleaser
+        uses: goreleaser/goreleaser-action@v6
+        with:
+          # either 'goreleaser' (default) or 'goreleaser-pro'
+          distribution: goreleaser
+          # 'latest', 'nightly', or a semver
+          version: '~> v2'
+          args: check
+
+      -
+        name: DryRun build GoReleaser
+        uses: goreleaser/goreleaser-action@v6
+        if: ${{ inputs.dry_run }}
+        with:
+          # either 'goreleaser' (default) or 'goreleaser-pro'
+          distribution: goreleaser
+          # 'latest', 'nightly', or a semver
+          version: '~> v2'
+          args: build --clean --timeout ${{ inputs.goreleaser-build-timeout-minutes }}m --snapshot
+
+      -
+        name: DryRun release GoReleaser
+        uses: goreleaser/goreleaser-action@v6
+        if: ${{ inputs.dry_run }}
+        with:
+          # either 'goreleaser' (default) or 'goreleaser-pro'
+          distribution: goreleaser
+          # 'latest', 'nightly', or a semver
+          version: '~> v2'
+          args: release --clean --timeout ${{ inputs.goreleaser-build-timeout-minutes }}m --snapshot
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Your GoReleaser Pro key, if you are using the 'goreleaser-pro' distribution
+          # GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
+
+      -
+        name: build GoReleaser
+        uses: goreleaser/goreleaser-action@v6
+        if: ${{ ! inputs.dry_run }}
+        with:
+          # either 'goreleaser' (default) or 'goreleaser-pro'
+          distribution: goreleaser
+          # 'latest', 'nightly', or a semver
+          version: '~> v2'
+          args: build --clean --timeout ${{ inputs.goreleaser-build-timeout-minutes }}m --auto-snapshot
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Your GoReleaser Pro key, if you are using the 'goreleaser-pro' distribution
+          # GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
+
+      -
+        name: release GoReleaser
+        uses: goreleaser/goreleaser-action@v6
+        if: ${{ ! inputs.dry_run }}
+        with:
+          # either 'goreleaser' (default) or 'goreleaser-pro'
+          distribution: goreleaser
+          # 'latest', 'nightly', or a semver
+          version: '~> v2'
+          args: release --clean --timeout ${{ inputs.goreleaser-build-timeout-minutes }}m --auto-snapshot
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Your GoReleaser Pro key, if you are using the 'goreleaser-pro' distribution
+          # GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
+
+      - name: upload-artifact
+        uses: actions/upload-artifact@v6
+        if: ${{ inputs.upload_artifact_name != null || ! inputs.dry_run }}
+        with:
+          name: ${{ inputs.upload_artifact_name }}-${{ inputs.version_name }}-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 5
+          overwrite: true
+          if-no-files-found: error
+          path: |
+            **/*metadata.json
+            **/*checksums.txt
+            **/*.zip
+            **/*.tar.gz
+            **/*.sha256

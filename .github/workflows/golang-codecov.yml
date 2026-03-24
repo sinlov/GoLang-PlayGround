@@ -1,7 +1,21 @@
 name: golang-codecov
 
 on:
-  workflow_call: # https://docs.github.com/actions/using-workflows/reusing-workflows#using-inputs-and-secrets-in-a-reusable-workflow
+  push:
+    tags:
+      - '*' # Push events to matching *, i.e. 1.0.0 v1.0, v20.15.10
+    paths-ignore:
+      - '**/README.md'
+    branches:
+      # - 'main'
+      - 'release-*'
+  pull_request:
+    paths-ignore:
+      - '**/README.md'
+    types: # https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
+      # - opened
+      - reopened
+      - closed
 
 permissions:
   contents: write
@@ -12,12 +26,12 @@ jobs:
     strategy:
       matrix:
         go:
-          - '^1.20'
+          - '^1.23'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Set up Go SDK
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v6
         with:
           go-version: ${{ matrix.go }}
           cache: false
@@ -26,9 +40,6 @@ jobs:
           go env
           go version
 
-      - name: Run go install check
-        run: go get -t -v ./...
-
       - name: Run go build
         run: go build -v -tags test ./...
 
@@ -36,8 +47,9 @@ jobs:
         run: go test -cover -tags test -coverprofile coverage.txt -covermode count -coverpkg ./... -v ./...
 
       - name: Codecov
-        uses: codecov/codecov-action@v3.1.4
+        uses: codecov/codecov-action@v5.5.2
         with:
-          token: ${{secrets.CODECOV_TOKEN}}
+          token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage.txt
+#           dry_run:  true
 #          verbose: true
