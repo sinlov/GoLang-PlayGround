@@ -38,7 +38,7 @@ ENV_ROOT_TEST_MAX_TIME :=1m
 ## go doc start
 ENV_GO_GODOC_PORT_NUMBER=36060
 ENV_GO_GODOC_EXPORT_PATH=build/godoc
-ENV_GO_GODOC_EXPORT_PKG =github.com/bridgewwater/GoLang-PlayGround/
+ENV_GO_GODOC_EXPORT_PKG =github.com/sinlov/GoLang-PlayGround
 include z-MakefileUtils/go-doc.mk
 ## go doc end
 
