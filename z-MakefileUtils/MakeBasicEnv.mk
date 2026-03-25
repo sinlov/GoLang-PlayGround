@@ -100,7 +100,7 @@ endif
 
 # finally change by env ENV_CI_DIST_CODE_MARK
 ifneq ($(strip $(ENV_CI_DIST_CODE_MARK)),)
-$(info -> change ENV_DIST_VERSION by ENV_CI_DIST_CODE_MARK)
+$(info -> change ENV_DIST_CODE_MARK by ENV_CI_DIST_CODE_MARK)
     ENV_DIST_CODE_MARK=${ENV_CI_DIST_CODE_MARK}
 endif
 
