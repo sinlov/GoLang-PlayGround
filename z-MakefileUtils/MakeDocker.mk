@@ -94,7 +94,7 @@ dockerPruneContainerParentBuild: dockerRmContainerParentBuild
 dockerTestBuildLatest:
 	docker build --rm=true --tag ${ENV_INFO_BUILD_DOCKER_SOURCE_IMAGE}:${ENV_INFO_BUILD_DOCKER_TAG} --file ${ENV_INFO_TEST_BUILD_DOCKER_FILE} .
 
-.PHONY: dockerTestBuildLatest
+.PHONY: dockerTestRunLatest
 dockerTestRunLatest:
 	docker image inspect --format='{{ .Created}}' ${ENV_INFO_BUILD_DOCKER_SOURCE_IMAGE}:${ENV_INFO_BUILD_DOCKER_TAG}
 	$(warning you can change test docker run args at here for dev)
