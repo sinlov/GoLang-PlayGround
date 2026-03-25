@@ -23,13 +23,13 @@ ENV_GO_PATH=$(shell go env GOPATH)
 .PHONY: go.mod.fetch
 go.mod.fetch:
 	@echo "-> can fetch last version github.com/gin-gonic/gin as"
-	@echo "go list -mod readonly -m -versions github.com/gin-gonic/gin | awk '{print \044\061 \042 lastest: \042 \044\0116\0106 }'"
+	@echo "go list -mod readonly -m -versions github.com/gin-gonic/gin | awk '{print \044\061 \042 latest: \042 \044\0116\0106 }'"
 	@echo ""
 ifeq ($(OS),Windows_NT)
 	@go list -mod mod -m -versions github.com/stretchr/testify
 else
 	@echo "last version"
-	@go list -mod mod -m -versions github.com/stretchr/testify | awk '{print $$1 " lastest: " $$NF }'
+	@go list -mod mod -m -versions github.com/stretchr/testify | awk '{print $$1 " latest: " $$NF }'
 endif
 
 .PHONY: go.mod.name
