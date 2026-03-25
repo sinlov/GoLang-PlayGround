@@ -93,7 +93,7 @@ jobs:
           dirname="${{ env.DIST_BINARY_NAME }}-${{ inputs.version_name }}-${{ matrix.go_os }}-${{ matrix.go_arch }}"
 
           # change build tag and ldflags if you need
-          go build -a -tags netgo -ldflags '-X main.buildID=${{ inputs.go_build_id }} -w -s --extldflags "-static -fpic"' -o $dirname/$binary_name ${{ env.DIST_BUILD_ENTRANCE }}
+          go build -a -tags netgo -ldflags '-w -s --extldflags "-static -fpic"' -o $dirname/$binary_name ${{ env.DIST_BUILD_ENTRANCE }}
 
           # add more resource to archive
           # mv doc/cmd.md "$dirname"
