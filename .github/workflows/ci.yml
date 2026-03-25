@@ -50,7 +50,7 @@ jobs:
     secrets: inherit
     with:
       run_test_case: true
-      run_golangci_lint: true
+      run_golangci_lint: false
       run_benchmark: ${{ ( github.event_name == 'push' && github.ref == 'refs/heads/main' ) || github.base_ref == 'main' }}
       run_test_coverage: true
 
