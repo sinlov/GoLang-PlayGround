@@ -3,7 +3,7 @@ name: go-release-platform
 on:
   workflow_call: # https://docs.github.com/actions/using-workflows/reusing-workflows#using-inputs-and-secrets-in-a-reusable-workflow
     inputs:
-      verison_name:
+      version_name:
         description: 'most of this use tag name'
         default: ''
         required: false
@@ -13,12 +13,17 @@ on:
         default: ''
         required: false
         type: string
+      go_build_id:
+        description: 'setup go build id'
+        default: 'unknown'
+        required: false
+        type: string
 
 env:
   DIST_BINARY_NAME: GoLang-PlayGround # to change your binary name, windows will auto add .exe
   DIST_BUILD_ENTRANCE: cmd/GoLang-PlayGround/main.go # to change your build entrance
 
-permissions:
+permissions: # https://docs.github.com/actions/using-workflows/workflow-syntax-for-github-actions#permissions
   contents: write
 
 jobs:
@@ -57,11 +62,19 @@ jobs:
             go_arch: arm64
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3
+      - name: Check inputs
+        run: |
+          echo "github.run_id: ${{ github.run_id }}"
+          echo "github.run_attempt: ${{ github.run_attempt }}"
+          echo "inputs.version_name: ${{ inputs.version_name }}"
+          echo "inputs.upload_artifact_name: ${{ inputs.upload_artifact_name }}"
+          echo "inputs.go_build_id: ${{ inputs.go_build_id }}"
+
+      - uses: actions/checkout@v6
       - name: Set up Go SDK
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v6
         with:
-          go-version: '^1.20'
+          go-version: '^1.24'
           cache: false
 
       - name: Build Release binary
@@ -69,7 +82,7 @@ jobs:
           go mod verify
           go mod download -x
           go mod tidy -v
-          go mod vendor
+          # go mod vendor
           # Replace with the name of your binary
           binary_name=${{ env.DIST_BINARY_NAME }}
 
@@ -77,13 +90,13 @@ jobs:
             binary_name=${{ env.DIST_BINARY_NAME }}.exe
           fi
 
-          dirname="${{ env.DIST_BINARY_NAME }}-${{ inputs.verison_name }}-${{ matrix.go_os }}-${{ matrix.go_arch }}"
+          dirname="${{ env.DIST_BINARY_NAME }}-${{ inputs.version_name }}-${{ matrix.go_os }}-${{ matrix.go_arch }}"
 
           # change build tag and ldflags if you need
           go build -a -tags netgo -ldflags '-w -s --extldflags "-static -fpic"' -o $dirname/$binary_name ${{ env.DIST_BUILD_ENTRANCE }}
 
           # add more resource to archive
-          # mv docs/cmd.md "$dirname"
+          # mv doc/cmd.md "$dirname"
 
           # archive and hash
           if [ "${{ matrix.os }}" = "windows-latest" ]; then
@@ -108,11 +121,12 @@ jobs:
           echo " archive sha256sum at: ${{ env.ASSET }}.sha256"
 
       - name: upload-artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v6
         if: ${{ inputs.upload_artifact_name != null }}
         with:
-          name: ${{ inputs.upload_artifact_name }}
+          name: ${{ inputs.upload_artifact_name }}-${{ inputs.version_name }}-${{ matrix.go_os }}-${{ matrix.go_arch }}
           retention-days: 5
+          overwrite: true
           if-no-files-found: error
           path: |
             ${{ env.ASSET }}

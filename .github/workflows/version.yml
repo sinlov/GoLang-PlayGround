@@ -47,16 +47,18 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: get version and conventional
         id: check-version
-        uses: convention-change/conventional-version-check@v1.2.0 # or change to latest version
+        uses: convention-change/conventional-version-check@v1.4.0 # or change to latest version
         with:
           sha-length: 8
 
       - name: check version and conventional
         run: |
+          echo "github.run_id: ${{ github.run_id }}"
+          echo "github.run_attempt: ${{ github.run_attempt }}"
           echo "sha: ${{ steps.check-version.outputs.sha }}"
           echo "env SHA-SHORT: ${{ env.SHA-SHORT }}"
           echo "short-sha: ${{ steps.check-version.outputs.short-sha }}"

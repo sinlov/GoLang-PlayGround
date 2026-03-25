@@ -4,8 +4,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestSimpleWorkPool(t *testing.T) {
@@ -30,9 +31,9 @@ func TestSimpleWorkPool(t *testing.T) {
 	if err == nil {
 		//fmt.Println("missing error")
 		t.Fatal("missing error")
-	} else {
-		t.Logf("some task err %v", err.Error())
-		assert.Equal(t, "task 51 , err missing", err.Error())
 	}
+
+	t.Logf("some task err %v", err.Error())
+	assert.Equal(t, "task 51 , err missing", err.Error())
 	//assert.Equal(t, "", "")
 }

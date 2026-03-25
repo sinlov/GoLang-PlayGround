@@ -1,0 +1,135 @@
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+version: 2
+
+project_name: GoLang-PlayGround
+
+builds:
+  - id: 'cli' # not set will be default
+    binary: "GoLang-PlayGround"
+    main: "./cmd/GoLang-PlayGround"
+    flags:
+      - -trimpath
+    # ldflags: -s -w -X main.version={{ .Version }} -X main.buildID={{ .ShortCommit }} -X main.commit={{ .FullCommit }} -X main.date={{ .Date }}
+    ldflags:
+      - -s -w
+      - -X main.version={{ .Version }}
+      - -X main.rawVersion={{ .RawVersion }}
+      - -X main.buildID={{ .ShortCommit }}
+      - -X main.commit={{ .FullCommit }}
+      - -X main.date={{ .Date }}
+      - --extldflags "-static -fpic"
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+      - windows
+      - linux
+    goarch:
+      - amd64
+      - arm64
+      - arm
+      # - 386
+    goarm:
+      - 6
+      - 7
+    gomips:
+      - hardfloat
+    ignore:
+      - goos: darwin
+        goarch: 386
+      # - goos: freebsd
+      #   goarch: arm64
+
+force_token: gitea
+gitea_urls:
+  api: https://github.com/api/v1
+  download: https://github.com/
+  # set to true if you use a self-signed certificate
+  skip_tls_verify: false
+
+archives:
+  - id: 'cli'  # not set will be default
+    # Builds reference which build instances should be archived in this archive.
+    ids:
+      - cli
+
+    formats:
+      - tar.gz
+    format_overrides:
+      - goos: windows
+        formats:
+          - zip
+    name_template: '{{ .Binary }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+
+    # Sets the given file info to all the binaries included from the `builds`.
+    #
+    # Default: copied from the source binary.
+    builds_info:
+      group: template-zoo
+      owner: template-zoo
+      mode: 0644
+      # format is `time.RFC3339Nano`
+      mtime: 2008-01-02T15:04:05Z
+
+    # Packaging only the binaries
+    # files:
+    #  - none*
+    # Additional files/globs you want to add to the archive
+    files:
+      # - LICENSE
+      - doc/*
+
+    # Set this to true if you want all files in the archive to be in a single directory.
+    # If set to true and you extract the archive 'goreleaser_Linux_arm64.tar.gz',
+    # you'll get a directory 'goreleaser_Linux_arm64'.
+    # If set to false, all files are extracted separately.
+    # You can also set it to a custom directory name (template is supported).
+    wrap_in_directory: true
+
+    # If set to true, will strip the parent directories away from binary files.
+    #
+    # This might be useful if you have your binary be built with a sub-directory
+    # for some reason, but do no want that sub-directory inside the archive.
+    strip_binary_directory: true
+
+    # Disables the binary count check.
+    allow_different_binary_count: false
+
+checksum:
+  # name_template: '{{ .ProjectName }}-{{ .Version }}-checksums.txt'
+  name_template: 'checksums.txt'
+
+changelog:
+  # Templates: allowed.
+  # disable: "{{ .Env.CREATE_CHANGELOG }}"
+  disable: false
+  use: git
+  format: "{{ .SHA }}: {{ .Message }} (@{{ .AuthorUsername }})"
+  sort: asc
+
+  filters:
+    exclude: # Commit messages matching the regexp listed here will be removed from
+      - '(?i)^docs?:'
+      - '(?i)^docs\([^:]+\):'
+      - '(?i)^docs\[[^:]+\]:'
+      - '^tests?:'
+      - '(?i)^dev:'
+      - '(?i)^chore:'
+      - '^build\(deps\): bump .* in /docs \(#\d+\)'
+      - '^build\(deps\): bump .* in /\.github/peril \(#\d+\)'
+      - '^build\(deps\): bump .* in /scripts/gen_github_action_config \(#\d+\)'
+      - Merge pull request
+      - Merge branch
+
+publishers:
+  - disable: true
+    name: production
+    ids:
+      - cli
+    checksum: true
+    meta: true
+
+release:
+  disable: true
+  ids:
+    - cli
